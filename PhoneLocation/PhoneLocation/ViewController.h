@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@class PersonCenter;
+@interface ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+{
+    NSArray *keys;
+    NSDictionary *contactsDic;
+    UIImage *headImage;//默认头像
+    PersonCenter *personCenter;
+}
+@property(nonatomic,strong) IBOutlet UITableView *myTableView;
 @end

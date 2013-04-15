@@ -18,6 +18,30 @@
 		399BB5CB171B9ECC00A133D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 399BB5CA171B9ECC00A133D6 /* Default-568h@2x.png */; };
 		399BB5CE171B9ECC00A133D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399BB5CD171B9ECC00A133D6 /* ViewController.m */; };
 		399BB5D1171B9ECC00A133D6 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 399BB5CF171B9ECC00A133D6 /* ViewController.xib */; };
+		F1384596171C47F700E65047 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F1384595171C47F700E65047 /* bg.png */; };
+		F1384599171C492C00E65047 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = F1384597171C492C00E65047 /* line.png */; };
+		F138459A171C492C00E65047 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = F1384598171C492C00E65047 /* nav.png */; };
+		F138459C171C493900E65047 /* topback.png in Resources */ = {isa = PBXBuildFile; fileRef = F138459B171C493900E65047 /* topback.png */; };
+		F138459F171C494900E65047 /* xiala.png in Resources */ = {isa = PBXBuildFile; fileRef = F138459D171C494900E65047 /* xiala.png */; };
+		F13845A0171C494900E65047 /* you.png in Resources */ = {isa = PBXBuildFile; fileRef = F138459E171C494900E65047 /* you.png */; };
+		F13845A8171C4DAF00E65047 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845A3171C4DAF00E65047 /* DataCenter.m */; };
+		F13845A9171C4DAF00E65047 /* ContactClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845A5171C4DAF00E65047 /* ContactClass.m */; };
+		F13845AA171C4DAF00E65047 /* BackgroundService.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845A7171C4DAF00E65047 /* BackgroundService.m */; };
+		F13845B0171C4E0900E65047 /* Waiting.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845AD171C4E0900E65047 /* Waiting.m */; };
+		F13845B1171C4E0900E65047 /* Waiting.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845AE171C4E0900E65047 /* Waiting.xib */; };
+		F13845B2171C4E0900E65047 /* SendSmsTip.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845AF171C4E0900E65047 /* SendSmsTip.xib */; };
+		F13845BD171C4E5A00E65047 /* SectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845B5171C4E5A00E65047 /* SectionHeader.m */; };
+		F13845BE171C4E5A00E65047 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845B6171C4E5A00E65047 /* SectionHeader.xib */; };
+		F13845BF171C4E5A00E65047 /* CommonUse.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845B8171C4E5A00E65047 /* CommonUse.m */; };
+		F13845C0171C4E5A00E65047 /* CommonUse.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845B9171C4E5A00E65047 /* CommonUse.xib */; };
+		F13845C1171C4E5A00E65047 /* NewCommonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845BB171C4E5A00E65047 /* NewCommonItem.m */; };
+		F13845C2171C4E5A00E65047 /* NewCommonItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845BC171C4E5A00E65047 /* NewCommonItem.xib */; };
+		F13845C6171C4E7800E65047 /* FriendTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845C4171C4E7800E65047 /* FriendTableCell.m */; };
+		F13845C7171C4E7800E65047 /* FriendTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845C5171C4E7800E65047 /* FriendTableCell.xib */; };
+		F13845C9171C543E00E65047 /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = F13845C8171C543E00E65047 /* head.png */; };
+		F13845CB171C54D300E65047 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F13845CA171C54D300E65047 /* arrow.png */; };
+		F13845CF171C562400E65047 /* PersonCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = F13845CD171C562400E65047 /* PersonCenter.m */; };
+		F13845D0171C562400E65047 /* PersonCenter.xib in Resources */ = {isa = PBXBuildFile; fileRef = F13845CE171C562400E65047 /* PersonCenter.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +61,39 @@
 		399BB5CC171B9ECC00A133D6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		399BB5CD171B9ECC00A133D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		399BB5D0171B9ECC00A133D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		F1384595171C47F700E65047 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		F1384597171C492C00E65047 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		F1384598171C492C00E65047 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
+		F138459B171C493900E65047 /* topback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topback.png; sourceTree = "<group>"; };
+		F138459D171C494900E65047 /* xiala.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiala.png; sourceTree = "<group>"; };
+		F138459E171C494900E65047 /* you.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = you.png; sourceTree = "<group>"; };
+		F13845A2171C4DAF00E65047 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
+		F13845A3171C4DAF00E65047 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
+		F13845A4171C4DAF00E65047 /* ContactClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactClass.h; sourceTree = "<group>"; };
+		F13845A5171C4DAF00E65047 /* ContactClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactClass.m; sourceTree = "<group>"; };
+		F13845A6171C4DAF00E65047 /* BackgroundService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundService.h; sourceTree = "<group>"; };
+		F13845A7171C4DAF00E65047 /* BackgroundService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundService.m; sourceTree = "<group>"; };
+		F13845AC171C4E0900E65047 /* Waiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waiting.h; sourceTree = "<group>"; };
+		F13845AD171C4E0900E65047 /* Waiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waiting.m; sourceTree = "<group>"; };
+		F13845AE171C4E0900E65047 /* Waiting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Waiting.xib; sourceTree = "<group>"; };
+		F13845AF171C4E0900E65047 /* SendSmsTip.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendSmsTip.xib; sourceTree = "<group>"; };
+		F13845B4171C4E5A00E65047 /* SectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeader.h; sourceTree = "<group>"; };
+		F13845B5171C4E5A00E65047 /* SectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeader.m; sourceTree = "<group>"; };
+		F13845B6171C4E5A00E65047 /* SectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
+		F13845B7171C4E5A00E65047 /* CommonUse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUse.h; sourceTree = "<group>"; };
+		F13845B8171C4E5A00E65047 /* CommonUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUse.m; sourceTree = "<group>"; };
+		F13845B9171C4E5A00E65047 /* CommonUse.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonUse.xib; sourceTree = "<group>"; };
+		F13845BA171C4E5A00E65047 /* NewCommonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCommonItem.h; sourceTree = "<group>"; };
+		F13845BB171C4E5A00E65047 /* NewCommonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCommonItem.m; sourceTree = "<group>"; };
+		F13845BC171C4E5A00E65047 /* NewCommonItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewCommonItem.xib; sourceTree = "<group>"; };
+		F13845C3171C4E7800E65047 /* FriendTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableCell.h; sourceTree = "<group>"; };
+		F13845C4171C4E7800E65047 /* FriendTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableCell.m; sourceTree = "<group>"; };
+		F13845C5171C4E7800E65047 /* FriendTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendTableCell.xib; sourceTree = "<group>"; };
+		F13845C8171C543E00E65047 /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
+		F13845CA171C54D300E65047 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		F13845CC171C562400E65047 /* PersonCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenter.h; sourceTree = "<group>"; };
+		F13845CD171C562400E65047 /* PersonCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenter.m; sourceTree = "<group>"; };
+		F13845CE171C562400E65047 /* PersonCenter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenter.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +140,20 @@
 		399BB5BA171B9ECC00A133D6 /* PhoneLocation */ = {
 			isa = PBXGroup;
 			children = (
+				F13845B3171C4E4B00E65047 /* 常用短信 */,
+				F13845AB171C4DF500E65047 /* 辅助 */,
+				F13845A1171C4D8C00E65047 /* 数据 */,
 				399BB5C3171B9ECC00A133D6 /* AppDelegate.h */,
 				399BB5C4171B9ECC00A133D6 /* AppDelegate.m */,
+				F13845C3171C4E7800E65047 /* FriendTableCell.h */,
+				F13845C4171C4E7800E65047 /* FriendTableCell.m */,
+				F13845C5171C4E7800E65047 /* FriendTableCell.xib */,
 				399BB5CC171B9ECC00A133D6 /* ViewController.h */,
 				399BB5CD171B9ECC00A133D6 /* ViewController.m */,
 				399BB5CF171B9ECC00A133D6 /* ViewController.xib */,
+				F13845CC171C562400E65047 /* PersonCenter.h */,
+				F13845CD171C562400E65047 /* PersonCenter.m */,
+				F13845CE171C562400E65047 /* PersonCenter.xib */,
 				399BB5BB171B9ECC00A133D6 /* Supporting Files */,
 			);
 			path = PhoneLocation;
@@ -96,6 +162,14 @@
 		399BB5BB171B9ECC00A133D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F13845CA171C54D300E65047 /* arrow.png */,
+				F13845C8171C543E00E65047 /* head.png */,
+				F1384597171C492C00E65047 /* line.png */,
+				F138459D171C494900E65047 /* xiala.png */,
+				F138459E171C494900E65047 /* you.png */,
+				F138459B171C493900E65047 /* topback.png */,
+				F1384598171C492C00E65047 /* nav.png */,
+				F1384595171C47F700E65047 /* bg.png */,
 				399BB5BC171B9ECC00A133D6 /* PhoneLocation-Info.plist */,
 				399BB5BD171B9ECC00A133D6 /* InfoPlist.strings */,
 				399BB5C0171B9ECC00A133D6 /* main.m */,
@@ -105,6 +179,46 @@
 				399BB5CA171B9ECC00A133D6 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F13845A1171C4D8C00E65047 /* 数据 */ = {
+			isa = PBXGroup;
+			children = (
+				F13845A2171C4DAF00E65047 /* DataCenter.h */,
+				F13845A3171C4DAF00E65047 /* DataCenter.m */,
+				F13845A4171C4DAF00E65047 /* ContactClass.h */,
+				F13845A5171C4DAF00E65047 /* ContactClass.m */,
+				F13845A6171C4DAF00E65047 /* BackgroundService.h */,
+				F13845A7171C4DAF00E65047 /* BackgroundService.m */,
+			);
+			name = "数据";
+			sourceTree = "<group>";
+		};
+		F13845AB171C4DF500E65047 /* 辅助 */ = {
+			isa = PBXGroup;
+			children = (
+				F13845AC171C4E0900E65047 /* Waiting.h */,
+				F13845AD171C4E0900E65047 /* Waiting.m */,
+				F13845AE171C4E0900E65047 /* Waiting.xib */,
+				F13845AF171C4E0900E65047 /* SendSmsTip.xib */,
+			);
+			name = "辅助";
+			sourceTree = "<group>";
+		};
+		F13845B3171C4E4B00E65047 /* 常用短信 */ = {
+			isa = PBXGroup;
+			children = (
+				F13845B4171C4E5A00E65047 /* SectionHeader.h */,
+				F13845B5171C4E5A00E65047 /* SectionHeader.m */,
+				F13845B6171C4E5A00E65047 /* SectionHeader.xib */,
+				F13845B7171C4E5A00E65047 /* CommonUse.h */,
+				F13845B8171C4E5A00E65047 /* CommonUse.m */,
+				F13845B9171C4E5A00E65047 /* CommonUse.xib */,
+				F13845BA171C4E5A00E65047 /* NewCommonItem.h */,
+				F13845BB171C4E5A00E65047 /* NewCommonItem.m */,
+				F13845BC171C4E5A00E65047 /* NewCommonItem.xib */,
+			);
+			name = "常用短信";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +277,21 @@
 				399BB5C9171B9ECC00A133D6 /* Default@2x.png in Resources */,
 				399BB5CB171B9ECC00A133D6 /* Default-568h@2x.png in Resources */,
 				399BB5D1171B9ECC00A133D6 /* ViewController.xib in Resources */,
+				F1384596171C47F700E65047 /* bg.png in Resources */,
+				F1384599171C492C00E65047 /* line.png in Resources */,
+				F138459A171C492C00E65047 /* nav.png in Resources */,
+				F138459C171C493900E65047 /* topback.png in Resources */,
+				F138459F171C494900E65047 /* xiala.png in Resources */,
+				F13845A0171C494900E65047 /* you.png in Resources */,
+				F13845B1171C4E0900E65047 /* Waiting.xib in Resources */,
+				F13845B2171C4E0900E65047 /* SendSmsTip.xib in Resources */,
+				F13845BE171C4E5A00E65047 /* SectionHeader.xib in Resources */,
+				F13845C0171C4E5A00E65047 /* CommonUse.xib in Resources */,
+				F13845C2171C4E5A00E65047 /* NewCommonItem.xib in Resources */,
+				F13845C7171C4E7800E65047 /* FriendTableCell.xib in Resources */,
+				F13845C9171C543E00E65047 /* head.png in Resources */,
+				F13845CB171C54D300E65047 /* arrow.png in Resources */,
+				F13845D0171C562400E65047 /* PersonCenter.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +305,15 @@
 				399BB5C1171B9ECC00A133D6 /* main.m in Sources */,
 				399BB5C5171B9ECC00A133D6 /* AppDelegate.m in Sources */,
 				399BB5CE171B9ECC00A133D6 /* ViewController.m in Sources */,
+				F13845A8171C4DAF00E65047 /* DataCenter.m in Sources */,
+				F13845A9171C4DAF00E65047 /* ContactClass.m in Sources */,
+				F13845AA171C4DAF00E65047 /* BackgroundService.m in Sources */,
+				F13845B0171C4E0900E65047 /* Waiting.m in Sources */,
+				F13845BD171C4E5A00E65047 /* SectionHeader.m in Sources */,
+				F13845BF171C4E5A00E65047 /* CommonUse.m in Sources */,
+				F13845C1171C4E5A00E65047 /* NewCommonItem.m in Sources */,
+				F13845C6171C4E7800E65047 /* FriendTableCell.m in Sources */,
+				F13845CF171C562400E65047 /* PersonCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +436,7 @@
 				399BB5D6171B9ECC00A133D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
