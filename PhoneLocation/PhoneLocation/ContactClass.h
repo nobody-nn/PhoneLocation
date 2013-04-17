@@ -13,6 +13,7 @@
     NSString *friendName;
     
     NSString *firstLetter;
+    NSArray *phoneNumbersArray;
     NSString *firstPhoneNumber;
 
     int recordID;
@@ -23,5 +24,6 @@
 @property (nonatomic,retain) NSString *friendName,*firstLetter,*firstPhoneNumber;
 @property (nonatomic,assign) int recordID;
 @property (nonatomic,retain) UIImage *headImage;
+@property (nonatomic,retain) NSArray *phoneNumbersArray;
 
 @end

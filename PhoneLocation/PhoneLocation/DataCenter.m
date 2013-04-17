@@ -9,7 +9,7 @@
 #import "DataCenter.h"
 
 @implementation DataCenter
-@synthesize allContactsDic,documentPath,whaleDic,totalContactCount,addressFinishLoad,commonDic,rootViewController,TMobileDic,TMobileIndex,selectedContactsDic,emojisDic,comboArray,androidDic,currentFaceType,tableDic,waiting,whosWaiting,emojiImage,androidImage,SendSmsTip,allSmsDic,selectedSmsArray,canWait;
+@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,rootViewController,tableDic,waiting,SendSmsTip,locationURLStringPre;
 
 static DataCenter *instance;
 +(DataCenter *)sharedInstance
@@ -35,21 +35,7 @@ static DataCenter *instance;
             //第一次初始化,并且保存到用户文档目录
             [self saveCommonDic];
         }
-        NSDictionary *faceDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"EmojiFace" ofType:@"plist"]];
-        self.emojisDic = [faceDic objectForKey:@"0"];
-        self.androidDic = [faceDic objectForKey:@"1"];
-        self.comboArray = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"combo" ofType:@"plist"]]objectForKey:@"combo"];
-        [[faceDic objectForKey:@"1"]objectForKey:kContentKey];
-        
-        self.whaleDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WhaleSms" ofType:@"plist"]];
-        self.TMobileDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TMobileSms" ofType:@"plist"]];
-        TMobileIndex = [[NSUserDefaults standardUserDefaults] integerForKey:kTMobileIndexKey];
-        self.selectedContactsDic = [NSMutableDictionary dictionary];
-        NSString *sysVersionString = [[UIDevice currentDevice] systemVersion];
-        if([sysVersionString rangeOfString:@"5."].location != NSNotFound)
-            self.canWait = YES;
-        else
-            self.canWait = NO; 
+        self.locationURLStringPre = @"http://www.youdao.com/smartresult-xml/search.s?type=mobile&q=";
     }
     return self;
 }

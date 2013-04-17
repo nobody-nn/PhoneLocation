@@ -28,7 +28,10 @@
     {
         personCenter = [[PersonCenter alloc] initWithNibName:@"PersonCenter" bundle:nil];
     }
-    //TODO:
+
+    ContactClass *contactForCell = [[contactsDic objectForKey:[keys objectAtIndex:[indexPath section]]] objectAtIndex:[indexPath row]];
+    [personCenter setThisContact:contactForCell];
+    [self.navigationController pushViewController:personCenter animated:YES];
 }
 
 #pragma mark - table datasource

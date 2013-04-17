@@ -10,19 +10,11 @@
 
 @implementation ContactClass
 
-@synthesize friendName,firstLetter,firstPhoneNumber,recordID,headImage;
+@synthesize friendName,firstLetter,firstPhoneNumber,recordID,headImage,phoneNumbersArray;
 
 -(void) dealloc
 {
-    [friendName release];
-    [firstLetter release];
-    [firstPhoneNumber release];
-    [headImage release];
-//    self.friendName = nil;
-//    self.firstLetter = nil;
-//    self.firstPhoneNumber = nil;
-//    self.headImage = nil;
-    [super dealloc];
+    NSLog(@"ContactClass dealloc");
 }
 
 @end

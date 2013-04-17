@@ -9,7 +9,7 @@
 #import "BackgroundService.h"
 #import "ContactClass.h"
 #import "DataCenter.h"
-#import "hzpyDicCode.h"
+//#import "hzpyDicCode.h"
 #import "ViewController.h"
 
 @implementation BackgroundService
@@ -18,13 +18,9 @@
 {
     if(self = [super init])
     {
-        words = [hzpyDicCode getHzpyDic];
-        if([words writeToFile:@"/Users/lxg/Desktop/wordsDic.plist" atomically:NO])
-        {
-            NSLog(@"yes to write");
-        }
-        [words retain];
+        //words = [hzpyDicCode getHzpyDic];
         
+        words = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wordsDic" ofType:@"plist"]];
     }
     return self;
 }
@@ -127,13 +123,24 @@
         [contact setRecordID:recordID];
         
         phones = ABRecordCopyValue(personRef,kABPersonPhoneProperty);
-        if(ABMultiValueGetCount(phones)>0)
-        {//有号码
-            eachPhoneNumRef = ABMultiValueCopyValueAtIndex(phones, 0);
-            eachPhoneNum = (NSString *)eachPhoneNumRef;
-            [contact setFirstPhoneNumber:eachPhoneNum];
-            CFRelease(eachPhoneNumRef);
+        int phoneCount = ABMultiValueGetCount(phones);
+        if (phoneCount > 0)
+        {
+            NSMutableArray *phoneArray = [NSMutableArray arrayWithCapacity:phoneCount];
+            for (int i = 0; i<phoneCount; i++)
+            {
+                eachPhoneNumRef = ABMultiValueCopyValueAtIndex(phones, 0);
+                eachPhoneNum = (NSString *)eachPhoneNumRef;
+                [phoneArray addObject:eachPhoneNum];
+                if (![contact firstPhoneNumber])
+                {
+                    [contact setFirstPhoneNumber:eachPhoneNum];
+                }
+                CFRelease(eachPhoneNumRef);
+            }
+            [contact setPhoneNumbersArray:phoneArray];//全部手机号
         }
+        
         CFRelease(phones);
         //--------名字--------
         friendName = [self getNameOfRecord:personRef];

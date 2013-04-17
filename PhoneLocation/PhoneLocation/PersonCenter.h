@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonCenter : UIViewController
+@class ContactClass;
+@interface PersonCenter : UIViewController<NSXMLParserDelegate>
+
+@property(nonatomic,retain) ContactClass *thisContact;
+@property(nonatomic,retain) NSMutableDictionary *parserDic;
 
 @end
