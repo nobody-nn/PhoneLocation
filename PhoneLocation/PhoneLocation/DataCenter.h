@@ -24,9 +24,10 @@
 @property(nonatomic,retain) NSString *documentPath,*locationURLStringPre;
 @property(nonatomic,assign) int totalContactCount,TMobileIndex,currentFaceType;
 @property(nonatomic,assign) BOOL addressFinishLoad;
-@property(nonatomic,retain) ViewController *rootViewController;
+@property(nonatomic,retain) ViewController *root;
 @property(nonatomic,retain) Waiting *waiting;
 @property(nonatomic,retain) UIView *SendSmsTip;
+@property(nonatomic,retain) UIViewController *whosWaiting;
 
 +(DataCenter *)sharedInstance;
 -(void)saveCommonDic;

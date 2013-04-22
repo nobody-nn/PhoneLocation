@@ -11,12 +11,9 @@
 @interface FriendTableCell : UITableViewCell
 {
     UILabel *nameLabel,*phoneNumberLabel;
-    UIImageView *headImageView,*m_checkImageView;
-    BOOL contactSelected;
+    UIImageView *headImageView;
 }
 @property(nonatomic,retain) IBOutlet UILabel *nameLabel,*phoneNumberLabel;
-@property(nonatomic,retain) IBOutlet UIImageView *headImageView,*m_checkImageView;
-@property(nonatomic,assign) BOOL contactSelected;
+@property(nonatomic,retain) IBOutlet UIImageView *headImageView;
 
-- (void) setChecked:(BOOL)checked;
 @end

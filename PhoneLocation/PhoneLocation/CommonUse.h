@@ -7,21 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SmsContent.h"
 #import "NewCommonItem.h"
+#import <MessageUI/MessageUI.h>
 
 @class SmsContent,NewCommonItem;
-@interface CommonUse : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface CommonUse : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMessageComposeViewControllerDelegate>
 {
     NSDictionary *tableDic;
-    SmsContent *superViewController;
     NSMutableArray *expandArray;
     UITableView *listTableView;
     NewCommonItem *newCommonItem;
+    UIView *SendSmsTip;
 }
-@property(nonatomic,assign) SmsContent *superViewController;
 @property(nonatomic,retain) IBOutlet UITableView *listTableView;
 @property(nonatomic,retain) NSMutableArray *expandArray;
+@property(nonatomic,retain) NSString *choosePhoneNum;
 
 -(void)initTable;
 

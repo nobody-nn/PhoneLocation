@@ -10,7 +10,7 @@
 
 @implementation PersonCell
 
-@synthesize phoneLabel,locationLabel;
+@synthesize phoneLabel,locationLabel,setButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

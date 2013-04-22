@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "BackgroundService.h"
 #import "ViewController.h"
+#import "DataCenter.h"
 
 @implementation AppDelegate
 
@@ -17,9 +18,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     ViewController *viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    [[DataCenter sharedInstance] setRoot:viewController];
     self.nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self.nav setNavigationBarHidden:YES];
     self.window.rootViewController = self.nav;
     [self.window makeKeyAndVisible];
+    
+    BackgroundService *service = [[BackgroundService alloc] init];
+    
+    [NSThread detachNewThreadSelector:@selector(readLocalAddress) toTarget:service withObject:nil];
+    
     return YES;
 }
 

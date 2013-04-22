@@ -253,6 +253,7 @@
 								<string key="NSFrame">{{51, 260}, {213, 112}}</string>
 								<reference key="NSSuperview" ref="663437439"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:639</string>
 								<reference key="IBUIBackgroundColor" ref="216691246"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -495,20 +496,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NewCommonItem</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="Confirm:">id</string>
-						<string key="cancel:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="Confirm:">
-							<string key="name">Confirm:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancel:">
-							<string key="name">cancel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="classifyPicker">UIPickerView</string>
 						<string key="contentTextView">UITextView</string>

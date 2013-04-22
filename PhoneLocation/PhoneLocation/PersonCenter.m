@@ -10,29 +10,47 @@
 #import "PersonCell.h"
 #import "ContactClass.h"
 #import "DataCenter.h"
+#import "PhonesActionSheet.h"
+#import "CommonUse.h"
+#import "SetLocationViewController.h"
 
 #define kIndexPathKey @"indexPath"
 #define kLocationStringKey @"location"
 #define kStoringKey @"storing"
+
+#define kSMSKey         1
+#define kCommonSmsKey   3
+#define kCallKey        2
 
 @interface PersonCenter()
 
 @property(nonatomic,retain) IBOutlet UITableView *phoneTableView;
 @property(nonatomic,retain) IBOutlet UIImageView *headImageView;
 @property(nonatomic,retain) IBOutlet UILabel *nameLabel;
-@property(nonatomic,retain) IBOutlet UILabel *firstPhoneLabel;
+@property(nonatomic,retain) NSString *choosePhoneNum;
 
 @end
 
 @implementation PersonCenter
 
-@synthesize thisContact = _thisContact,parserDic;
+@synthesize parserDic,phoneTableView,headImageView,nameLabel,choosePhoneNum;
 
 #pragma mark - begining
 
--(void)viewWillAppear:(BOOL)animated
+-(ContactClass *)thisContact
 {
-    //
+    return thisContact;
+}
+
+-(void)setThisContact:(ContactClass *)contact
+{
+    if (contact != thisContact)
+    {
+        thisContact = contact;
+    }
+    [self.headImageView setImage:thisContact.headImage];
+    [self.nameLabel setText:thisContact.friendName];
+    [self.phoneTableView reloadData];
 }
 
 #pragma mark - actions
@@ -42,31 +60,179 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+-(void)showChoices:(int)action
+{
+    actionsType = action;
+    PhonesActionSheet *phoneSheet = [[PhonesActionSheet alloc] initWithArray:self.thisContact.phoneNumbersArray title:@"选择号码" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:nil];
+    [phoneSheet showInView:self.view];
+}
+
 -(IBAction)sendMessage:(id)sender
 {
-    
+    if ([thisContact.phoneNumbersArray count] == 1)
+    {
+        self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:0];
+        [self loadDetailView];
+    }
+    else if ([thisContact.phoneNumbersArray count] > 1)
+    {
+        [self showChoices:kSMSKey];
+    }
 }
 
 -(IBAction)simpleMessage:(id)sender
 {
-    
+    if ([thisContact.phoneNumbersArray count] == 1)
+    {
+        self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:0];
+        [self loadCommonSms];
+    }
+    else if ([thisContact.phoneNumbersArray count] > 1)
+    {
+        [self showChoices:kCommonSmsKey];
+    }
 }
 
 -(IBAction)call:(id)sender
 {
-    
+    if ([thisContact.phoneNumbersArray count] == 1)
+    {
+        self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:0];
+        [self makeACall];
+    }
+    else if ([thisContact.phoneNumbersArray count] > 1)
+    {
+        [self showChoices:kCallKey];
+    }
 }
 
 -(IBAction)changeAvatar:(id)sender
 {
-    
+    NSURL *avatarURL = [NSURL URLWithString:@"avatar://com.166.avatar?origin=PhoneLocation://app"];
+    if ([[UIApplication sharedApplication] canOpenURL:avatarURL])
+    {
+        [[UIApplication sharedApplication] openURL:avatarURL];
+    }
+    else
+    {
+        NSURL *downloadURL = [NSURL URLWithString:@"http://itunes.apple.com/cn/app/id496226675?mt=8"];
+        [[UIApplication sharedApplication] openURL:downloadURL];
+    }
 }
 
 -(IBAction)copyAndSend:(id)sender
 {
+    //TODO:copy-->string
+}
+
+#pragma mark - 辅助
+
+-(void)loadDetailView
+{
+    MFMessageComposeViewController *messageViewController = [[MFMessageComposeViewController alloc] init];
+    messageViewController.messageComposeDelegate = self;
+    NSMutableArray *sendTo = [NSMutableArray array];
+    [sendTo addObject:self.choosePhoneNum];
+    messageViewController.recipients = sendTo;
+    [self presentViewController:messageViewController animated:YES completion:nil];
     
 }
 
+-(void)makeACall
+{
+    NSString *callString = @"telprompt://";
+    NSString *phoneURL = [NSString stringWithFormat:@"%@%@",callString,self.choosePhoneNum];
+    phoneURL = [phoneURL stringByReplacingOccurrencesOfString:@"+86" withString:@""];
+    phoneURL = [phoneURL stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    phoneURL = [phoneURL stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneURL]];
+}
+
+-(void)loadCommonSms
+{
+    if (!commonUse)
+    {
+        commonUse = [[CommonUse alloc] initWithNibName:@"CommonUse" bundle:nil];
+    }
+    
+    [self.navigationController pushViewController:commonUse animated:YES];
+}
+
+#pragma mark - sms delegates
+
+-(void)removeTip:(UIView *)tip
+{
+    [UIView animateWithDuration:0.5
+                     animations:^{tip.alpha = 0.0;}
+                     completion:^(BOOL finished){ [tip setHidden:YES]; }];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    if(result == MessageComposeResultSent)
+    {
+        if(!SendSmsTip)
+        {
+            SendSmsTip = [[[NSBundle mainBundle] loadNibNamed:@"SendSmsTip" owner:nil options:nil]objectAtIndex:0];
+            [SendSmsTip setFrame:CGRectMake(100, 160, 120, 35)];
+            [self.view addSubview:SendSmsTip];
+        }
+        else
+        {
+            SendSmsTip.alpha = 1.0;
+            [SendSmsTip setHidden:NO];
+        }
+        [self performSelector:@selector(removeTip:) withObject:SendSmsTip afterDelay:0.7f];
+    }
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - phone actionsheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:buttonIndex];
+    switch (actionsType)
+    {
+        case kSMSKey:
+        {
+            if([MFMessageComposeViewController canSendText])
+            {
+                [self loadDetailView];
+            }
+            break;
+        }
+        case kCommonSmsKey:
+        {
+            [self loadCommonSms];
+            break;
+        }
+        case kCallKey:
+        {
+            [self makeACall];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+#pragma mark - table actions handler
+
+-(void)setClick:(id)sender
+{
+    int tag = [sender tag];
+    if (!setLocation)
+    {
+        setLocation = [[SetLocationViewController alloc] initWithNibName:@"SetLocationViewController" bundle:nil];
+    }
+    
+    NSString *selectedPhone = [[self.thisContact phoneNumbersArray] objectAtIndex:tag];
+    setLocation.selectedPhone = selectedPhone;
+    [self presentViewController:setLocation animated:YES completion:nil];
+    setLocation.thisContact = self.thisContact;
+}
 
 #pragma mark - table datasource
 
@@ -94,6 +260,8 @@
     
     NSString *phoneString = [[self.thisContact phoneNumbersArray] objectAtIndex:[indexPath row]];
     [[cell phoneLabel] setText:phoneString];
+    [[cell setButton] setTag:[indexPath row]];
+    [[cell setButton] addTarget:self action:@selector(setClick:) forControlEvents:UIControlEventTouchUpInside];
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@",[[DataCenter sharedInstance]locationURLStringPre],phoneString];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];

@@ -31,9 +31,7 @@
 
 -(void)dealloc
 {
-    [titleLabel release];
-    [sectionButton release];
-    [super dealloc];
+    NSLog(@"SectionHeader dealloc");
 }
 
 @end

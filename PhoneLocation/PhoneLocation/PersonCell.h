@@ -11,5 +11,6 @@
 @interface PersonCell : UITableViewCell
 
 @property(nonatomic,retain) IBOutlet UILabel *phoneLabel,*locationLabel;
+@property(nonatomic,retain) IBOutlet UIButton *setButton;
 
 @end

@@ -33,13 +33,13 @@
     NSString *firstName = nil;
     NSString *lastName = nil;
     
-    firstName = (NSString *)ABRecordCopyValue(record, kABPersonFirstNameProperty);
+    firstName = (__bridge NSString *)ABRecordCopyValue(record, kABPersonFirstNameProperty);
     if(firstName)
     {
         friendName = firstName;
     }
     
-    lastName = (NSString *)ABRecordCopyValue(record, kABPersonLastNameProperty);
+    lastName = (__bridge NSString *)ABRecordCopyValue(record, kABPersonLastNameProperty);
     if(lastName && friendName)
     {
         friendName = [lastName stringByAppendingString:friendName];
@@ -54,10 +54,6 @@
         //什么都没有
         friendName = @"";
     }
-    if(firstName)
-        [firstName release];
-    if(lastName)
-        [lastName release];
     
     return friendName;
 }
@@ -65,7 +61,7 @@
 //读取通讯录
 -(void)readLocalAddress
 {
-    ABAddressBookRef addressRef = ABAddressBookCreate();
+    ABAddressBookRef addressRef;
     
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
     {
@@ -77,7 +73,6 @@
                                                      dispatch_semaphore_signal(sema);
                                                  });
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        dispatch_release(sema);
     }
     else
     {
@@ -88,11 +83,10 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"通讯录访问被禁止" message:@"请在系统->设置->隐私->通讯录里开启访问权限" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
-        [alert release];
         return;
     }
 
-    NSArray *personArray = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressRef);
+    NSArray *personArray = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressRef);
     //26字母+#
     NSMutableDictionary *tempContactDic = [NSMutableDictionary dictionaryWithCapacity:27];
 
@@ -117,12 +111,12 @@
     
     for (id personRef in personArray)
     {
-        recordID = ABRecordGetRecordID(personRef);
+        recordID = ABRecordGetRecordID((__bridge ABRecordRef)(personRef));
         
         contact = [[ContactClass alloc] init];
         [contact setRecordID:recordID];
         
-        phones = ABRecordCopyValue(personRef,kABPersonPhoneProperty);
+        phones = ABRecordCopyValue((__bridge ABRecordRef)(personRef),kABPersonPhoneProperty);
         int phoneCount = ABMultiValueGetCount(phones);
         if (phoneCount > 0)
         {
@@ -130,7 +124,7 @@
             for (int i = 0; i<phoneCount; i++)
             {
                 eachPhoneNumRef = ABMultiValueCopyValueAtIndex(phones, 0);
-                eachPhoneNum = (NSString *)eachPhoneNumRef;
+                eachPhoneNum = (__bridge NSString *)eachPhoneNumRef;
                 [phoneArray addObject:eachPhoneNum];
                 if (![contact firstPhoneNumber])
                 {
@@ -143,14 +137,14 @@
         
         CFRelease(phones);
         //--------名字--------
-        friendName = [self getNameOfRecord:personRef];
+        friendName = [self getNameOfRecord:(__bridge ABRecordRef)(personRef)];
         [contact setFriendName:friendName];
         
         //--------头像--------
-        if(ABPersonHasImageData(personRef))
+        if(ABPersonHasImageData((__bridge ABRecordRef)(personRef)))
         {
-            cfdata=ABPersonCopyImageData(personRef);
-            headImage = [UIImage imageWithData:(NSData *)cfdata];
+            cfdata=ABPersonCopyImageData((__bridge ABRecordRef)(personRef));
+            headImage = [UIImage imageWithData:(__bridge NSData *)cfdata];
             [contact setHeadImage:headImage];
             CFRelease(cfdata);
         }
@@ -192,14 +186,13 @@
             perLetterArray = [NSMutableArray array];
         }
         [perLetterArray addObject:contact];
-        [contact release];
         //以首字母做为键值，保存数组
         [tempContactDic setObject:perLetterArray forKey:firstLetter];
     }
     [[DataCenter sharedInstance] setTotalContactCount:noImageCount];
     [[DataCenter sharedInstance] setAllContactsDic:tempContactDic];
     
-    ViewController *viewController = [[DataCenter sharedInstance] rootViewController];
+    ViewController *viewController = [[DataCenter sharedInstance] root];
     if(viewController)
     {
         [viewController performSelectorOnMainThread:@selector(updateViewWithNewLoadData) withObject:nil waitUntilDone:NO];//对应更新全部联系人
@@ -207,15 +200,7 @@
 
     [[DataCenter sharedInstance] setAddressFinishLoad:YES];
     
-    [personArray release];
     CFRelease(addressRef);
-}
-
--(void)dealloc
-{
-    [words release];
-    words = nil;
-    [super dealloc];
 }
 
 @end

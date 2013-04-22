@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@class ContactClass;
-@interface PersonCenter : UIViewController<NSXMLParserDelegate>
-
+@class ContactClass,CommonUse,SetLocationViewController;
+@interface PersonCenter : UIViewController<NSXMLParserDelegate,UIActionSheetDelegate,MFMessageComposeViewControllerDelegate>
+{
+    int actionsType;
+    UIView *SendSmsTip;
+    CommonUse *commonUse;
+    ContactClass *thisContact;
+    SetLocationViewController *setLocation;
+}
 @property(nonatomic,retain) ContactClass *thisContact;
 @property(nonatomic,retain) NSMutableDictionary *parserDic;
 

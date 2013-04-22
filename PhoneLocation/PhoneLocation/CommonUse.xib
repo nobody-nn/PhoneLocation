@@ -203,9 +203,10 @@
 					<object class="IBUIButton" id="187359766">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{254, -1}, {56, 46}}</string>
+						<string key="NSFrame">{{254, 4}, {56, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -405,20 +406,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CommonUse</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addClick:">id</string>
-						<string key="backClick:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addClick:">
-							<string key="name">addClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="backClick:">
-							<string key="name">backClick:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">listTableView</string>
 						<string key="NS.object.0">UITableView</string>
@@ -443,7 +430,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="bg.png">{640, 960}</string>
-			<string key="buttonBG.png">{98, 88}</string>
+			<string key="buttonBG.png">{108, 59}</string>
 			<string key="nav.png">{640, 98}</string>
 			<string key="topback.png">{100, 58}</string>
 			<string key="xk.png">{394, 70}</string>

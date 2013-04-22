@@ -11,14 +11,16 @@
 #import "SectionHeader.h"
 
 @implementation CommonUse
-@synthesize superViewController,listTableView,expandArray;
+@synthesize listTableView,expandArray;
+
+#pragma mark - actions
 
 -(IBAction)addClick:(id)sender
 {
     if(!newCommonItem)
     {
         newCommonItem = [[NewCommonItem alloc] initWithNibName:@"NewCommonItem" bundle:nil];
-        [newCommonItem setSuperViewController:self];
+        [newCommonItem setParent:self];
     }
     [self.navigationController pushViewController:newCommonItem animated:YES];
 }
@@ -28,18 +30,51 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - sms delegate
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    //MessageComposeResultCancelled,
+    //MessageComposeResultSent,
+    //MessageComposeResultFailed
+    
+    if(result == MessageComposeResultSent)
+    {
+        if(!SendSmsTip)
+        {
+            SendSmsTip = [[[NSBundle mainBundle] loadNibNamed:@"SendSmsTip" owner:nil options:nil]objectAtIndex:0];
+            [SendSmsTip setFrame:CGRectMake(100, 160, 120, 35)];
+            [self.view addSubview:SendSmsTip];
+        }
+        else
+        {
+            SendSmsTip.alpha = 1.0;
+            [SendSmsTip setHidden:NO];
+        }
+        [self performSelector:@selector(removeTip:) withObject:SendSmsTip afterDelay:0.7f];
+    }
+    
+    [self dismissModalViewControllerAnimated:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
 #pragma mark - table delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //do sth
-    //返回字符串
-    NSString *contentString = [[superViewController contentTextView]text];
     NSDictionary *sectionDic = [tableDic objectForKey:[NSString stringWithFormat:@"%d",[indexPath section]]];
     NSArray *sectionArray = [sectionDic objectForKey:kCommonSectionArray];
-    contentString = [contentString stringByAppendingString:[sectionArray objectAtIndex:[indexPath row]]];
-    [[superViewController contentTextView] setText:contentString];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSString *contentString = [sectionArray objectAtIndex:[indexPath row]];
+    
+    MFMessageComposeViewController *messageViewController = [[MFMessageComposeViewController alloc] init];
+    messageViewController.messageComposeDelegate = self;
+    NSMutableArray *sendTo = [NSMutableArray array];
+    [sendTo addObject:self.choosePhoneNum];
+    messageViewController.recipients = sendTo;
+    [messageViewController setBody:contentString];
+    [self presentViewController:messageViewController animated:YES completion:nil];
 }
 
 //编辑模式
@@ -123,7 +158,7 @@
     cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if(!cell)
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID]autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
         [cell setBackgroundColor:[UIColor clearColor]];
     }
@@ -131,7 +166,7 @@
     NSDictionary *sectionDic = [tableDic objectForKey:[NSString stringWithFormat:@"%d",[indexPath section]]];
     NSArray *sectionArray = [sectionDic objectForKey:kCommonSectionArray];
     [[cell textLabel] setFont:[UIFont fontWithName:@"Helvetica" size:14]];
-    [[cell textLabel] setMinimumFontSize:9];
+    [[cell textLabel] setMinimumScaleFactor:0.5f];
     [[cell textLabel] setText:[sectionArray objectAtIndex:[indexPath row]]];
     return cell;
 }
@@ -186,26 +221,12 @@
     // e.g. self.myOutlet = nil;
 
     self.listTableView = nil;
-    [expandArray release];
     expandArray = nil;
-//    if (newCommonItem)
-//    {
-//        [newCommonItem release];
-//        newCommonItem = nil;
-//    }
 }
 
 -(void)dealloc
 {
-    if(listTableView)
-        [listTableView release];
-    if(expandArray)
-        [expandArray release];
-    if (newCommonItem)
-    {
-        [newCommonItem release];
-    }
-    [super dealloc];
+    NSLog(@"CommonUse dealloc");
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

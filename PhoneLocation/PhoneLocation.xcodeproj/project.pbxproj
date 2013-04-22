@@ -18,6 +18,20 @@
 		399BB5CB171B9ECC00A133D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 399BB5CA171B9ECC00A133D6 /* Default-568h@2x.png */; };
 		399BB5CE171B9ECC00A133D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399BB5CD171B9ECC00A133D6 /* ViewController.m */; };
 		399BB5D1171B9ECC00A133D6 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 399BB5CF171B9ECC00A133D6 /* ViewController.xib */; };
+		F1018FAD17244A9900488646 /* PhonesActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = F1018FAB17244A9900488646 /* PhonesActionSheet.m */; };
+		F1018FAE17244A9900488646 /* PhonesActionSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1018FAC17244A9900488646 /* PhonesActionSheet.xib */; };
+		F102C9FF172576AB0070E684 /* buttonBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F102C9FE172576AB0070E684 /* buttonBG.png */; };
+		F102CA03172582270070E684 /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F102CA01172582260070E684 /* SetLocationViewController.m */; };
+		F102CA04172582270070E684 /* SetLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F102CA02172582270070E684 /* SetLocationViewController.xib */; };
+		F102CA091725860A0070E684 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F102CA051725860A0070E684 /* iphone.png */; };
+		F102CA0B1725860A0070E684 /* xl.png in Resources */ = {isa = PBXBuildFile; fileRef = F102CA071725860A0070E684 /* xl.png */; };
+		F102CA0C1725860A0070E684 /* zuhe.png in Resources */ = {isa = PBXBuildFile; fileRef = F102CA081725860A0070E684 /* zuhe.png */; };
+		F102CA0E172586150070E684 /* tbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F102CA0D172586140070E684 /* tbg.png */; };
+		F102CA12172588850070E684 /* SetLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F102CA11172588850070E684 /* SetLocationView.m */; };
+		F102CA14172588920070E684 /* SetLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F102CA13172588920070E684 /* SetLocationView.xib */; };
+		F102CA16172589F60070E684 /* verArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F102CA15172589F60070E684 /* verArrow.png */; };
+		F102CA1917258D1A0070E684 /* CustomLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F102CA1817258D1A0070E684 /* CustomLocationView.m */; };
+		F102CA1B17258D240070E684 /* CustomLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F102CA1A17258D240070E684 /* CustomLocationView.xib */; };
 		F1384596171C47F700E65047 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F1384595171C47F700E65047 /* bg.png */; };
 		F1384599171C492C00E65047 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = F1384597171C492C00E65047 /* line.png */; };
 		F138459A171C492C00E65047 /* nav.png in Resources */ = {isa = PBXBuildFile; fileRef = F1384598171C492C00E65047 /* nav.png */; };
@@ -46,7 +60,6 @@
 		F19F35C4171D8B0600784431 /* bubbleSelf.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35C3171D8B0600784431 /* bubbleSelf.png */; };
 		F19F35C6171D8B1F00784431 /* jt.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35C5171D8B1F00784431 /* jt.png */; };
 		F19F35C8171D8B3900784431 /* kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35C7171D8B3900784431 /* kuang.png */; };
-		F19F35CA171D8B4400784431 /* buttonBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35C9171D8B4400784431 /* buttonBG.png */; };
 		F19F35CC171D8B4B00784431 /* tj.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35CB171D8B4B00784431 /* tj.png */; };
 		F19F35CE171D8FA200784431 /* xk.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35CD171D8FA200784431 /* xk.png */; };
 		F19F35D1171D91EF00784431 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = F19F35CF171D91EE00784431 /* search.png */; };
@@ -95,6 +108,24 @@
 		399BB5CC171B9ECC00A133D6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		399BB5CD171B9ECC00A133D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		399BB5D0171B9ECC00A133D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		F1018FAA17244A9900488646 /* PhonesActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhonesActionSheet.h; sourceTree = "<group>"; };
+		F1018FAB17244A9900488646 /* PhonesActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhonesActionSheet.m; sourceTree = "<group>"; };
+		F1018FAC17244A9900488646 /* PhonesActionSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhonesActionSheet.xib; sourceTree = "<group>"; };
+		F102C9FE172576AB0070E684 /* buttonBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBG.png; sourceTree = "<group>"; };
+		F102CA00172582260070E684 /* SetLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetLocationViewController.h; sourceTree = "<group>"; };
+		F102CA01172582260070E684 /* SetLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
+		F102CA02172582270070E684 /* SetLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetLocationViewController.xib; sourceTree = "<group>"; };
+		F102CA051725860A0070E684 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
+		F102CA071725860A0070E684 /* xl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xl.png; sourceTree = "<group>"; };
+		F102CA081725860A0070E684 /* zuhe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuhe.png; sourceTree = "<group>"; };
+		F102CA0D172586140070E684 /* tbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tbg.png; sourceTree = "<group>"; };
+		F102CA10172588850070E684 /* SetLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetLocationView.h; sourceTree = "<group>"; };
+		F102CA11172588850070E684 /* SetLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetLocationView.m; sourceTree = "<group>"; };
+		F102CA13172588920070E684 /* SetLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetLocationView.xib; sourceTree = "<group>"; };
+		F102CA15172589F60070E684 /* verArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verArrow.png; sourceTree = "<group>"; };
+		F102CA1717258D1A0070E684 /* CustomLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLocationView.h; sourceTree = "<group>"; };
+		F102CA1817258D1A0070E684 /* CustomLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLocationView.m; sourceTree = "<group>"; };
+		F102CA1A17258D240070E684 /* CustomLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomLocationView.xib; sourceTree = "<group>"; };
 		F1384595171C47F700E65047 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		F1384597171C492C00E65047 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		F1384598171C492C00E65047 /* nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav.png; sourceTree = "<group>"; };
@@ -132,7 +163,6 @@
 		F19F35C3171D8B0600784431 /* bubbleSelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSelf.png; sourceTree = "<group>"; };
 		F19F35C5171D8B1F00784431 /* jt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jt.png; sourceTree = "<group>"; };
 		F19F35C7171D8B3900784431 /* kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuang.png; sourceTree = "<group>"; };
-		F19F35C9171D8B4400784431 /* buttonBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonBG.png; sourceTree = "<group>"; };
 		F19F35CB171D8B4B00784431 /* tj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tj.png; sourceTree = "<group>"; };
 		F19F35CD171D8FA200784431 /* xk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xk.png; sourceTree = "<group>"; };
 		F19F35CF171D91EE00784431 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -229,6 +259,10 @@
 		399BB5BB171B9ECC00A133D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F102CA0D172586140070E684 /* tbg.png */,
+				F102CA051725860A0070E684 /* iphone.png */,
+				F102CA071725860A0070E684 /* xl.png */,
+				F102CA081725860A0070E684 /* zuhe.png */,
 				F19F35DC171D97BE00784431 /* Person */,
 				F19F35DB171D97A700784431 /* general */,
 				F19F35D3171D964600784431 /* wordsDic.plist */,
@@ -241,6 +275,22 @@
 				399BB5CA171B9ECC00A133D6 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F102CA0F1725884E0070E684 /* 设置归属地 */ = {
+			isa = PBXGroup;
+			children = (
+				F102CA00172582260070E684 /* SetLocationViewController.h */,
+				F102CA01172582260070E684 /* SetLocationViewController.m */,
+				F102CA02172582270070E684 /* SetLocationViewController.xib */,
+				F102CA10172588850070E684 /* SetLocationView.h */,
+				F102CA11172588850070E684 /* SetLocationView.m */,
+				F102CA13172588920070E684 /* SetLocationView.xib */,
+				F102CA1717258D1A0070E684 /* CustomLocationView.h */,
+				F102CA1817258D1A0070E684 /* CustomLocationView.m */,
+				F102CA1A17258D240070E684 /* CustomLocationView.xib */,
+			);
+			name = "设置归属地";
 			sourceTree = "<group>";
 		};
 		F13845A1171C4D8C00E65047 /* 数据 */ = {
@@ -259,6 +309,9 @@
 		F13845AB171C4DF500E65047 /* 辅助 */ = {
 			isa = PBXGroup;
 			children = (
+				F1018FAA17244A9900488646 /* PhonesActionSheet.h */,
+				F1018FAB17244A9900488646 /* PhonesActionSheet.m */,
+				F1018FAC17244A9900488646 /* PhonesActionSheet.xib */,
 				F13845AC171C4E0900E65047 /* Waiting.h */,
 				F13845AD171C4E0900E65047 /* Waiting.m */,
 				F13845AE171C4E0900E65047 /* Waiting.xib */,
@@ -286,13 +339,13 @@
 		F19F35DB171D97A700784431 /* general */ = {
 			isa = PBXGroup;
 			children = (
+				F102C9FE172576AB0070E684 /* buttonBG.png */,
 				F1C04672171EF85C00CB0B23 /* tip.png */,
 				F1C04670171EF38800CB0B23 /* search-1.png */,
 				F19F35CF171D91EE00784431 /* search.png */,
 				F19F35D0171D91EE00784431 /* toolbar_find.png */,
 				F19F35CD171D8FA200784431 /* xk.png */,
 				F19F35CB171D8B4B00784431 /* tj.png */,
-				F19F35C9171D8B4400784431 /* buttonBG.png */,
 				F19F35C7171D8B3900784431 /* kuang.png */,
 				F19F35C3171D8B0600784431 /* bubbleSelf.png */,
 				F19F35C5171D8B1F00784431 /* jt.png */,
@@ -312,6 +365,7 @@
 		F19F35DC171D97BE00784431 /* Person */ = {
 			isa = PBXGroup;
 			children = (
+				F102CA15172589F60070E684 /* verArrow.png */,
 				F19F35FB171D97DC00784431 /* person.png */,
 				F19F35DD171D97D000784431 /* bddh.png */,
 				F19F35DE171D97D000784431 /* button-hui.png */,
@@ -352,6 +406,7 @@
 		F19F35FE171D9E7300784431 /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
+				F102CA0F1725884E0070E684 /* 设置归属地 */,
 				F13845CC171C562400E65047 /* PersonCenter.h */,
 				F13845CD171C562400E65047 /* PersonCenter.m */,
 				F13845CE171C562400E65047 /* PersonCenter.xib */,
@@ -437,7 +492,6 @@
 				F19F35C4171D8B0600784431 /* bubbleSelf.png in Resources */,
 				F19F35C6171D8B1F00784431 /* jt.png in Resources */,
 				F19F35C8171D8B3900784431 /* kuang.png in Resources */,
-				F19F35CA171D8B4400784431 /* buttonBG.png in Resources */,
 				F19F35CC171D8B4B00784431 /* tj.png in Resources */,
 				F19F35CE171D8FA200784431 /* xk.png in Resources */,
 				F19F35D1171D91EF00784431 /* search.png in Resources */,
@@ -462,6 +516,16 @@
 				F1C04671171EF38800CB0B23 /* search-1.png in Resources */,
 				F1C04673171EF85C00CB0B23 /* tip.png in Resources */,
 				F1C04678171EF8E300CB0B23 /* SearchViewController.xib in Resources */,
+				F1018FAE17244A9900488646 /* PhonesActionSheet.xib in Resources */,
+				F102C9FF172576AB0070E684 /* buttonBG.png in Resources */,
+				F102CA04172582270070E684 /* SetLocationViewController.xib in Resources */,
+				F102CA091725860A0070E684 /* iphone.png in Resources */,
+				F102CA0B1725860A0070E684 /* xl.png in Resources */,
+				F102CA0C1725860A0070E684 /* zuhe.png in Resources */,
+				F102CA0E172586150070E684 /* tbg.png in Resources */,
+				F102CA14172588920070E684 /* SetLocationView.xib in Resources */,
+				F102CA16172589F60070E684 /* verArrow.png in Resources */,
+				F102CA1B17258D240070E684 /* CustomLocationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +550,10 @@
 				F13845CF171C562400E65047 /* PersonCenter.m in Sources */,
 				F19F3601171D9EA800784431 /* PersonCell.m in Sources */,
 				F1C04677171EF8E300CB0B23 /* SearchViewController.m in Sources */,
+				F1018FAD17244A9900488646 /* PhonesActionSheet.m in Sources */,
+				F102CA03172582270070E684 /* SetLocationViewController.m in Sources */,
+				F102CA12172588850070E684 /* SetLocationView.m in Sources */,
+				F102CA1917258D1A0070E684 /* CustomLocationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

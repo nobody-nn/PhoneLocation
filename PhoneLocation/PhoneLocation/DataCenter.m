@@ -9,7 +9,7 @@
 #import "DataCenter.h"
 
 @implementation DataCenter
-@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,rootViewController,tableDic,waiting,SendSmsTip,locationURLStringPre;
+@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,root,tableDic,waiting,SendSmsTip,locationURLStringPre,whosWaiting;
 
 static DataCenter *instance;
 +(DataCenter *)sharedInstance

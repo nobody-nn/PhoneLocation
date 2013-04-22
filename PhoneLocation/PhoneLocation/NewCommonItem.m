@@ -10,7 +10,7 @@
 #import "DataCenter.h"
 
 @implementation NewCommonItem
-@synthesize superViewController,classifyPicker,contentTextView,scrollView;
+@synthesize parent,classifyPicker,contentTextView,scrollView;
 
 #pragma mark - textView delegate
 
@@ -44,7 +44,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"请填写要添加的内容" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
         [alert show];
-        [alert release];
         return;
     }
     [contentTextView resignFirstResponder];
@@ -58,9 +57,9 @@
     //保存,刷新
     [[DataCenter sharedInstance] setCommonDic:commonDic];
     [[DataCenter sharedInstance] saveCommonDic];
-    [superViewController initTable];
-    [[superViewController expandArray] replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:YES]];
-    [[superViewController listTableView] reloadData];
+    [parent initTable];
+    [[parent expandArray] replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:YES]];
+    [[parent listTableView] reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -123,21 +122,12 @@
     self.classifyPicker = nil;
     self.contentTextView = nil;
     self.scrollView = nil;
-    [classifyArray release];
     classifyArray = nil;
 }
 
 -(void)dealloc
 {
-    if(classifyPicker)
-        [classifyPicker release];
-    if(contentTextView)
-        [contentTextView release];
-    if(scrollView)
-        [scrollView release];
-    if(classifyArray)
-        [classifyArray release];
-    [super dealloc];
+    NSLog(@"NewCommonItem dealloc");
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

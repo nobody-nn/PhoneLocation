@@ -11,6 +11,7 @@
 #import "ContactClass.h"
 #import "FriendTableCell.h"
 #import "PersonCenter.h"
+#import "SearchViewController.h"
 
 @interface ViewController ()
 
@@ -19,6 +20,17 @@
 @implementation ViewController
 
 @synthesize myTableView = _myTableView;
+
+#pragma mark - actions
+
+-(IBAction)searchClick:(id)sender
+{
+    if (!searchViewController)
+    {
+        searchViewController = [[SearchViewController alloc]initWithNibName:@"SearchViewController" bundle:nil];
+    }
+    [self.navigationController pushViewController:searchViewController animated:YES];
+}
 
 #pragma mark - table delegate
 
@@ -30,8 +42,8 @@
     }
 
     ContactClass *contactForCell = [[contactsDic objectForKey:[keys objectAtIndex:[indexPath section]]] objectAtIndex:[indexPath row]];
-    [personCenter setThisContact:contactForCell];
     [self.navigationController pushViewController:personCenter animated:YES];
+    [personCenter setThisContact:contactForCell];
 }
 
 #pragma mark - table datasource
