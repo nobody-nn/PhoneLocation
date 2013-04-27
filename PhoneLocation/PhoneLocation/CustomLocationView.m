@@ -21,6 +21,7 @@
 
 - (IBAction)editEnd:(id)sender
 {
+    [sender resignFirstResponder];
     [self.parent editEnd];
 }
 

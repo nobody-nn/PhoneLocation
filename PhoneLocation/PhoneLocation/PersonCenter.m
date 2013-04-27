@@ -13,6 +13,7 @@
 #import "PhonesActionSheet.h"
 #import "CommonUse.h"
 #import "SetLocationViewController.h"
+#import "BackgroundService.h"
 
 #define kIndexPathKey @"indexPath"
 #define kLocationStringKey @"location"
@@ -28,12 +29,14 @@
 @property(nonatomic,retain) IBOutlet UIImageView *headImageView;
 @property(nonatomic,retain) IBOutlet UILabel *nameLabel;
 @property(nonatomic,retain) NSString *choosePhoneNum;
+@property(nonatomic,retain) IBOutlet UIScrollView *backScrollView;
+@property(nonatomic,retain) NSDictionary *parserDic,*configDic;
 
 @end
 
 @implementation PersonCenter
 
-@synthesize parserDic,phoneTableView,headImageView,nameLabel,choosePhoneNum;
+@synthesize parserDic,phoneTableView,headImageView,nameLabel,choosePhoneNum,backScrollView;
 
 #pragma mark - begining
 
@@ -127,6 +130,11 @@
 
 #pragma mark - 辅助
 
+-(void)reloadPhoneTable
+{
+    [self.phoneTableView reloadData];
+}
+
 -(void)loadDetailView
 {
     MFMessageComposeViewController *messageViewController = [[MFMessageComposeViewController alloc] init];
@@ -190,7 +198,8 @@
 
 #pragma mark - phone actionsheet delegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:buttonIndex];
     switch (actionsType)
@@ -228,8 +237,8 @@
         setLocation = [[SetLocationViewController alloc] initWithNibName:@"SetLocationViewController" bundle:nil];
     }
     
-    NSString *selectedPhone = [[self.thisContact phoneNumbersArray] objectAtIndex:tag];
-    setLocation.selectedPhone = selectedPhone;
+    setLocation.phoneIndex = tag;
+    setLocation.parent = self;
     [self presentViewController:setLocation animated:YES completion:nil];
     setLocation.thisContact = self.thisContact;
 }
@@ -238,11 +247,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.parserDic)
-    {
-        [parserDic removeAllObjects];
-        self.parserDic = [NSMutableDictionary dictionary];
-    }
+    self.thisContact.locationDic = [NSMutableDictionary dictionary];
     if([self.thisContact phoneNumbersArray])
         return [[self.thisContact phoneNumbersArray] count];
     return 0;
@@ -263,22 +268,35 @@
     [[cell setButton] setTag:[indexPath row]];
     [[cell setButton] addTarget:self action:@selector(setClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSString *URLString = [NSString stringWithFormat:@"%@%@",[[DataCenter sharedInstance]locationURLStringPre],phoneString];
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
-    
-    [NSURLConnection sendAsynchronousRequest:req queue:[[NSOperationQueue alloc] init] completionHandler:
-     ^(NSURLResponse *response,NSData *data,NSError *error)
+    NSString *locationString = [[self.thisContact locationDic] objectForKey:phoneString];
+    if (locationString)
     {
-        NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-        parser.delegate = self;
-        NSMutableDictionary *thisCellDic = [NSMutableDictionary dictionary];
-        [thisCellDic setObject:indexPath forKey:kIndexPathKey];
-        [thisCellDic setObject:[NSMutableString string] forKey:kLocationStringKey];
-        [thisCellDic setObject:@"" forKey:kStoringKey];
-        [self.parserDic setObject:parser forKey:thisCellDic];
+        [[cell locationLabel] setText:locationString];
     }
-     ];
-    
+    else
+    {
+        NSString *URLString = [NSString stringWithFormat:@"%@%@",[[DataCenter sharedInstance]locationURLStringPre],[BackgroundService getPhoneStringWith:phoneString]];
+        NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
+        
+        [NSURLConnection sendAsynchronousRequest:req queue:[[NSOperationQueue alloc] init] completionHandler:
+         ^(NSURLResponse *response,NSData *data,NSError *error)
+        {
+            NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+            NSMutableDictionary *thisCellDic = [NSMutableDictionary dictionary];
+            [thisCellDic setObject:@"0" forKey:kStoringKey];
+            NSMutableDictionary *tempParserDic = [NSMutableDictionary dictionaryWithDictionary:self.parserDic];
+            [tempParserDic setObject:parser forKey:indexPath];
+            self.parserDic = tempParserDic;
+            
+            NSMutableDictionary *tempConfigDic = [NSMutableDictionary dictionaryWithDictionary:self.configDic];
+            [tempConfigDic setObject:thisCellDic forKey:indexPath];
+            self.configDic = tempConfigDic;
+            
+            parser.delegate = self;
+            [parser parse];
+        }
+         ];
+    }
     return cell;
 }
 
@@ -286,7 +304,7 @@
 
 #define kLocationLabel @"location"
 
--(NSMutableDictionary *)findDicWith:(NSXMLParser *)parser
+-(id)findDicWith:(NSXMLParser *)parser
 {
     NSArray *allKeys = [self.parserDic allKeys];
     NSMutableDictionary *perDicKey;
@@ -300,37 +318,52 @@
             break;
         }
     }
+    
     return perDicKey;
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *) qualifiedName attributes:(NSDictionary *)attributeDict
-{
+{//起始标签
     if ([elementName isEqualToString:kLocationLabel])
     {
-        NSMutableDictionary *perDicKey = [self findDicWith:parser];
-        [perDicKey setObject:@"1" forKey:kStoringKey];
+        id perDicKey = [self findDicWith:parser];
+        NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:[self.configDic objectForKey:perDicKey]];
+        
+        NSLog(@"class:%@",[perDicKey class]);
+        [tempDic setObject:@"1" forKey:kStoringKey];//bool的yes
+        
+        NSMutableDictionary *tempConfigDic = [NSMutableDictionary dictionaryWithDictionary:self.configDic];
+        [tempConfigDic setObject:tempDic forKey:perDicKey];
+        self.configDic = tempConfigDic;
     }
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:kLocationLabel])
-    {
-        NSMutableDictionary *perDicKey = [self findDicWith:parser];
-        [perDicKey setObject:@"" forKey:kStoringKey];
-        //TODO:更新cell
-        PersonCell *cellTpUpdate = (PersonCell *)[self.phoneTableView cellForRowAtIndexPath:[perDicKey objectForKey:kIndexPathKey]];
-        [[cellTpUpdate locationLabel] setText:[perDicKey objectForKey:kLocationStringKey]];
-    }
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{//结束标签
+    
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
-{
-    NSMutableDictionary *perDicKey = [self findDicWith:parser];
-    if ([[perDicKey objectForKey:kStoringKey]length]>0)
+{//内容字符
+    id perDicKey = [self findDicWith:parser];
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:[self.configDic objectForKey:perDicKey]];
+    
+    if ([[tempDic objectForKey:kStoringKey]isEqualToString:@"1"])
     {
-        NSMutableString *currentString = [perDicKey objectForKey:kLocationStringKey];
-        [currentString appendString:string];
-        [perDicKey setObject:currentString forKey:kLocationStringKey];
+        [tempDic setObject:string forKey:kLocationStringKey];
+        [tempDic setObject:@"0" forKey:kStoringKey];
+        
+        NSMutableDictionary *tempConfigDic = [NSMutableDictionary dictionaryWithDictionary:self.configDic];
+        [tempConfigDic setObject:tempDic forKey:perDicKey];
+        self.configDic = tempConfigDic;
+        
+        PersonCell *cellToUpdate = (PersonCell *)[self.phoneTableView cellForRowAtIndexPath:(NSIndexPath *)perDicKey];
+        if (!string || [string length] == 0)
+        {
+            string = @"未知";
+        }
+        [[cellToUpdate locationLabel] setText:string];
+        [[self.thisContact locationDic] setObject:string forKey:[[cellToUpdate phoneLabel] text]];
     }
 }
 
@@ -363,6 +396,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [backScrollView setContentSize:CGSizeMake(320, 418)];
 }
 
 - (void)viewDidUnload

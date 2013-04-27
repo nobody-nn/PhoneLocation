@@ -10,7 +10,7 @@
 
 @implementation ContactClass
 
-@synthesize friendName,firstLetter,firstPhoneNumber,recordID,headImage,phoneNumbersArray;
+@synthesize friendName,firstLetter,firstPhoneNumber,recordID,headImage,phoneNumbersArray,locationDic;
 
 -(void) dealloc
 {

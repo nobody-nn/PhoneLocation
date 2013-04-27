@@ -19,6 +19,7 @@
     SetLocationViewController *setLocation;
 }
 @property(nonatomic,retain) ContactClass *thisContact;
-@property(nonatomic,retain) NSMutableDictionary *parserDic;
+
+-(void)reloadPhoneTable;
 
 @end

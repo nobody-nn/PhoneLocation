@@ -15,7 +15,7 @@
 
 @end
 
-@class SetLocationView,CustomLocationView,ContactClass;
+@class SetLocationView,CustomLocationView,ContactClass,PersonCenter;
 @interface SetLocationViewController : UIViewController<SetLocationDelegate>
 {
     NSArray *selectedImageName;
@@ -27,7 +27,9 @@
 }
 
 @property (nonatomic,retain) ContactClass *thisContact;
-@property (nonatomic,retain) NSString *selectedPhone;
+//@property (nonatomic,retain) NSString *selectedPhone;
+@property (nonatomic,assign) int phoneIndex;
+@property(nonatomic,assign) PersonCenter *parent;
 
 - (void)editBegin;
 - (void)editEnd;

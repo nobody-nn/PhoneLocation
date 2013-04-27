@@ -21,15 +21,17 @@
 @interface DataCenter : NSObject
 
 @property(nonatomic,retain) NSDictionary *allContactsDic,*commonDic,*tableDic;
-@property(nonatomic,retain) NSString *documentPath,*locationURLStringPre;
+@property(nonatomic,retain) NSString *documentPath,*locationURLStringPre,*changedLocationPath;
 @property(nonatomic,assign) int totalContactCount,TMobileIndex,currentFaceType;
 @property(nonatomic,assign) BOOL addressFinishLoad;
 @property(nonatomic,retain) ViewController *root;
 @property(nonatomic,retain) Waiting *waiting;
 @property(nonatomic,retain) UIView *SendSmsTip;
 @property(nonatomic,retain) UIViewController *whosWaiting;
+@property(nonatomic,retain) NSMutableDictionary *changedLocationDic;
 
 +(DataCenter *)sharedInstance;
 -(void)saveCommonDic;
+-(void)saveChangedDic;
 
 @end

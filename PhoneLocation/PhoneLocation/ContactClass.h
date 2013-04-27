@@ -18,12 +18,13 @@
 
     int recordID;
     UIImage *headImage;
-    
+    NSMutableDictionary *locationDic;
 }
 
 @property (nonatomic,retain) NSString *friendName,*firstLetter,*firstPhoneNumber;
 @property (nonatomic,assign) int recordID;
 @property (nonatomic,retain) UIImage *headImage;
 @property (nonatomic,retain) NSArray *phoneNumbersArray;
+@property (nonatomic,retain) NSMutableDictionary *locationDic;
 
 @end

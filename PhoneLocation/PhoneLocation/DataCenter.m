@@ -9,7 +9,7 @@
 #import "DataCenter.h"
 
 @implementation DataCenter
-@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,root,tableDic,waiting,SendSmsTip,locationURLStringPre,whosWaiting;
+@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,root,tableDic,waiting,SendSmsTip,locationURLStringPre,whosWaiting,changedLocationDic,changedLocationPath;
 
 static DataCenter *instance;
 +(DataCenter *)sharedInstance
@@ -36,6 +36,12 @@ static DataCenter *instance;
             [self saveCommonDic];
         }
         self.locationURLStringPre = @"http://www.youdao.com/smartresult-xml/search.s?type=mobile&q=";
+        self.changedLocationPath = [NSString stringWithFormat:@"%@/changed.plist",documentPath];
+        self.changedLocationDic = [NSMutableDictionary dictionaryWithContentsOfFile:self.changedLocationPath];
+        if (!self.changedLocationDic)
+        {
+            self.changedLocationDic = [NSMutableDictionary dictionary];
+        }
     }
     return self;
 }
@@ -43,6 +49,13 @@ static DataCenter *instance;
 -(void)saveCommonDic
 {
     if(![self.commonDic writeToFile:[NSString stringWithFormat:@"%@/common.plist",self.documentPath] atomically:YES])
+    {
+        //should not be able to get here
+    }
+}
+-(void)saveChangedDic
+{
+    if(![self.changedLocationDic writeToFile:self.changedLocationPath atomically:YES])
     {
         //should not be able to get here
     }

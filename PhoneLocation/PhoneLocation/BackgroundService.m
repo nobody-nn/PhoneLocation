@@ -14,6 +14,21 @@
 
 @implementation BackgroundService
 
++(NSString *)getPhoneStringWith:(NSString *)originString
+{
+    NSMutableString *result = [NSMutableString stringWithCapacity:[originString length]];
+    unichar perCha;
+    for (int i = 0; i < [originString length]; i++)
+    {
+        perCha = [originString characterAtIndex:i];
+        if (perCha <= '9' && perCha >= '0')
+        {
+            [result appendFormat:@"%c",perCha];
+        }
+    }
+    return result;
+}
+
 -(id)init
 {
     if(self = [super init])
@@ -33,11 +48,16 @@
     NSString *firstName = nil;
     NSString *lastName = nil;
     
-    firstName = (__bridge NSString *)ABRecordCopyValue(record, kABPersonFirstNameProperty);
+    CFStringRef firstRef = ABRecordCopyValue(record, kABPersonFirstNameProperty);
+    firstName = (__bridge NSString *)firstRef;
+    
     if(firstName)
     {
         friendName = firstName;
     }
+    
+    CFStringRef lastRef = ABRecordCopyValue(record, kABPersonFirstNameProperty);
+    lastName = (__bridge NSString *)lastRef;
     
     lastName = (__bridge NSString *)ABRecordCopyValue(record, kABPersonLastNameProperty);
     if(lastName && friendName)
@@ -86,7 +106,9 @@
         return;
     }
 
-    NSArray *personArray = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressRef);
+    CFArrayRef personArrayRef = ABAddressBookCopyArrayOfAllPeople(addressRef);
+    NSArray *personArray = (__bridge NSArray *)personArrayRef;
+
     //26字母+#
     NSMutableDictionary *tempContactDic = [NSMutableDictionary dictionaryWithCapacity:27];
 
@@ -123,7 +145,7 @@
             NSMutableArray *phoneArray = [NSMutableArray arrayWithCapacity:phoneCount];
             for (int i = 0; i<phoneCount; i++)
             {
-                eachPhoneNumRef = ABMultiValueCopyValueAtIndex(phones, 0);
+                eachPhoneNumRef = ABMultiValueCopyValueAtIndex(phones, i);
                 eachPhoneNum = (__bridge NSString *)eachPhoneNumRef;
                 [phoneArray addObject:eachPhoneNum];
                 if (![contact firstPhoneNumber])
@@ -199,7 +221,7 @@
     }
 
     [[DataCenter sharedInstance] setAddressFinishLoad:YES];
-    
+    CFRelease(personArrayRef);
     CFRelease(addressRef);
 }
 

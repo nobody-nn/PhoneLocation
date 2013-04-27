@@ -142,7 +142,7 @@
 							<object class="IBUIImageView" id="784290705">
 								<reference key="NSNextResponder" ref="958738892"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{287, 16}, {15, 20}}</string>
+								<string key="NSFrame">{{276, 16}, {15, 20}}</string>
 								<reference key="NSSuperview" ref="958738892"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -290,17 +290,12 @@
 					<string key="superclassName">UITableViewCell</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="headImageView">UIImageView</string>
-						<string key="m_checkImageView">UIImageView</string>
 						<string key="nameLabel">UILabel</string>
 						<string key="phoneNumberLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="headImageView">
 							<string key="name">headImageView</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="m_checkImageView">
-							<string key="name">m_checkImageView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="nameLabel">
