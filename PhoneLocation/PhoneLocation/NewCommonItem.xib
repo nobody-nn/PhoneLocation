@@ -82,6 +82,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
 						<double key="IBUIContentEdgeInsets.top">5</double>
 						<double key="IBUIContentEdgeInsets.bottom">5</double>
 						<double key="IBUIContentEdgeInsets.left">2</double>
@@ -146,7 +147,7 @@
 					<object class="IBUIButton" id="1007235233">
 						<reference key="NSNextResponder" ref="948479906"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{252, -1}, {55, 45}}</string>
+						<string key="NSFrame">{{254, 6}, {56, 32}}</string>
 						<reference key="NSSuperview" ref="948479906"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="663437439"/>
@@ -155,6 +156,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
+						<bool key="IBUIReversesTitleShadowWhenHighlighted">YES</bool>
 						<double key="IBUIContentEdgeInsets.top">0.0</double>
 						<double key="IBUIContentEdgeInsets.bottom">1</double>
 						<double key="IBUIContentEdgeInsets.left">1</double>
@@ -187,7 +189,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="883767925">
 								<reference key="NSNextResponder" ref="663437439"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">288</int>
 								<string key="NSFrame">{{20, 225}, {42, 21}}</string>
 								<reference key="NSSuperview" ref="663437439"/>
 								<reference key="NSWindow"/>
@@ -249,11 +251,10 @@
 							</object>
 							<object class="IBUITextView" id="167403380">
 								<reference key="NSNextResponder" ref="663437439"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">288</int>
 								<string key="NSFrame">{{51, 260}, {213, 112}}</string>
 								<reference key="NSSuperview" ref="663437439"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:639</string>
 								<reference key="IBUIBackgroundColor" ref="216691246"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -496,6 +497,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NewCommonItem</string>
 					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="Confirm:">id</string>
+						<string key="cancel:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="Confirm:">
+							<string key="name">Confirm:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancel:">
+							<string key="name">cancel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="classifyPicker">UIPickerView</string>
 						<string key="contentTextView">UITextView</string>
@@ -528,7 +543,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="bg.png">{640, 960}</string>
-			<string key="buttonBG.png">{98, 88}</string>
+			<string key="buttonBG.png">{108, 59}</string>
 			<string key="kuang.png">{442, 220}</string>
 			<string key="nav.png">{640, 98}</string>
 			<string key="topback.png">{100, 58}</string>

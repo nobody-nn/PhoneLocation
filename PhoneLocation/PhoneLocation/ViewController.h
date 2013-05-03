@@ -13,7 +13,6 @@
 {
     NSArray *keys;
     NSDictionary *contactsDic;
-    UIImage *headImage;//默认头像
     PersonCenter *personCenter;
     SearchViewController *searchViewController;
 }

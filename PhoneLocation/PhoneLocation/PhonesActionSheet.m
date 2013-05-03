@@ -100,7 +100,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //do sth
-    [self dismissWithClickedButtonIndex:[indexPath row] animated:YES];
+    [self dismissWithClickedButtonIndex:[indexPath row]+1 animated:YES];
 }
 
 #pragma mark - table data source

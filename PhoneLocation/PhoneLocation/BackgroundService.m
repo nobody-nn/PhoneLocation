@@ -14,7 +14,7 @@
 
 @implementation BackgroundService
 
-+(NSString *)getPhoneStringWith:(NSString *)originString
++(NSString *)getNumeralWith:(NSString *)originString
 {
     NSMutableString *result = [NSMutableString stringWithCapacity:[originString length]];
     unichar perCha;
@@ -27,6 +27,44 @@
         }
     }
     return result;
+}
+
++(NSString *)getCorrectIDWith:(NSString *)originString
+{
+    int ai[] = {1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2};
+    int weight[] = {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1};
+    //37082819880827562
+    int perValue;
+    int total = 0;
+    for (int i = 0; i<17; i++)
+    {
+        perValue = [originString characterAtIndex:i] - 48;
+        total += perValue * weight[i];
+    }
+    total %= 11;
+    NSRange range;
+    range.length = 1;
+    range.location = 17;
+    if (total == 2)
+    {
+        if ([originString characterAtIndex:17] == 'x')
+        {
+            return originString;
+        }
+        else
+        {
+            NSString *resultString = [originString stringByReplacingCharactersInRange:range withString:@"x"];
+            return resultString;
+        }
+    }
+    else
+    {
+        total = ai[total];
+        NSString *resultString = [originString stringByReplacingCharactersInRange:range withString:[NSString stringWithFormat:@"%d",total]];
+        return resultString;
+    }
+    
+    return originString;
 }
 
 -(id)init

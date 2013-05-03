@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController
+enum SearchType {
+    SearchPhone = 1,
+    SearchID = 2
+    };
 
+@interface SearchViewController : UIViewController<NSXMLParserDelegate>
+{
+    enum SearchType type;
+    BOOL storing;
+}
 @end

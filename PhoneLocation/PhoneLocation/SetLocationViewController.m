@@ -21,11 +21,12 @@
 @property(nonatomic,retain) IBOutlet UILabel *nameLabel,*phoneLabel;
 @property(nonatomic,retain) IBOutlet UIScrollView *backScrollView;
 @property(nonatomic,retain) NSString *selectedPhone,*originLabelString;
+@property(nonatomic,retain) IBOutlet UIImageView *buttonBGImageView;
 
 @end
 
 @implementation SetLocationViewController
-@synthesize setLocation,custom,reset,thisContact,headImageView,nameLabel,phoneIndex,backScrollView,selectedPhone,originLabelString,parent;
+@synthesize setLocation,custom,reset,thisContact,headImageView,nameLabel,phoneIndex,backScrollView,selectedPhone,originLabelString,parent,buttonBGImageView;
 
 #pragma mark - begining
 
@@ -40,11 +41,18 @@
     {
         thisContact = contact;
     }
-    [self.headImageView setImage:thisContact.headImage];
+    if ([thisContact headImage])
+    {
+        [[self headImageView] setImage:[thisContact headImage]];
+    }
+    else
+    {
+        [[self headImageView] setImage:[[DataCenter sharedInstance] headImage]];
+    }
     [self.nameLabel setText:thisContact.friendName];
     
-    selectedPhone = [[self.thisContact phoneNumbersArray] objectAtIndex:self.phoneIndex];
-    [self.phoneLabel setText:selectedPhone];
+    self.selectedPhone = [[self.thisContact phoneNumbersArray] objectAtIndex:self.phoneIndex];
+    [self.phoneLabel setText:self.selectedPhone];
     
     ABAddressBookRef addressRef;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0)
@@ -66,7 +74,17 @@
     ABRecordRef personRef = ABAddressBookGetPersonWithRecordID(addressRef, self.thisContact.recordID);
     ABMultiValueRef phones = ABRecordCopyValue(personRef,kABPersonPhoneProperty);
     CFStringRef originRef = ABMultiValueCopyLabelAtIndex(phones, self.phoneIndex);
-    self.originLabelString = (__bridge NSString *)originRef;
+    NSString *originLabel = (__bridge NSString *)originRef;
+    if ([[[DataCenter sharedInstance] labelsDic] objectForKey:originLabel])
+    {
+        self.originLabelString = [[[DataCenter sharedInstance] labelsDic] objectForKey:originLabel];
+    }
+    else
+    {
+        originLabel = [originLabel stringByReplacingOccurrencesOfString:@"_$!<" withString:@""];
+        originLabel = [originLabel stringByReplacingOccurrencesOfString:@">!$_" withString:@""];
+    }
+    
     CFRelease(originRef);
     CFRelease(phones);
     CFRelease(addressRef);
@@ -127,6 +145,12 @@
         [[[DataCenter sharedInstance] changedLocationDic] setObject:self.originLabelString forKey:self.selectedPhone];
         [[DataCenter sharedInstance] saveChangedDic];
         ABAddressBookSave(addressRef, nil);
+        
+        //Doc 保存
+        NSMutableDictionary *tempChangedDic = [[DataCenter sharedInstance] changedLocationDic];
+        
+        [tempChangedDic setObject:self.originLabelString forKey:self.selectedPhone];
+        [[DataCenter sharedInstance] saveChangedDic];
     }
     else
     {
@@ -137,7 +161,7 @@
     CFRelease(toChangeValue);
     CFRelease(phones);
     CFRelease(addressRef);
-    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - actions
@@ -150,7 +174,11 @@
 -(IBAction)topButtonClick:(id)sender
 {
     int buttonTag = [sender tag];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    float animationTime = abs(buttonTag - [preButton tag]) * 0.5f;
+    [UIView animateWithDuration:animationTime animations:^{
+        buttonBGImageView.center = CGPointMake(20 + buttonTag * 109, buttonBGImageView.center.y);
+    }];
     
     [preButton setImage:nil forState:UIControlStateNormal];
     [sender setImage:[UIImage imageNamed:[selectedImageName objectAtIndex:buttonTag]] forState:UIControlStateNormal];
@@ -166,13 +194,12 @@
             {
                 setLocationView = [[[NSBundle mainBundle] loadNibNamed:@"SetLocationView" owner:nil options:nil] objectAtIndex:0];
             }
-            //TODO:初始化数据
             
             [setLocationView setFrame:CGRectMake(28, 195, 265, 190)];
             [setLocationView setDelegate:self];
             [self.backScrollView addSubview:setLocationView];
             [setLocationView.originLabel setText:self.originLabelString];
-            [setLocationView.toChangeLabel setText:[self.thisContact.locationDic objectForKey:self.selectedPhone]];
+            [setLocationView.toChangeLabel setText:[[[DataCenter sharedInstance] requestedDic] objectForKey:self.selectedPhone]];
             preView = setLocationView;
             break;
         }
@@ -184,7 +211,6 @@
             {
                 customLocationView = [[[NSBundle mainBundle] loadNibNamed:@"CustomLocationView" owner:nil options:nil] objectAtIndex:0];
             }
-            //TODO:初始化数据
             
             [customLocationView setFrame:CGRectMake(28, 195, 265, 190)];
             [customLocationView setDelegate:self];
@@ -196,19 +222,24 @@
         }
         case 2:
         {
+            if (![[[DataCenter sharedInstance] changedLocationDic] objectForKey:self.selectedPhone])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"没有更改过" message:@"只有本软件修改过的号码才可以恢复" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+                [alert show];
+                break;
+            }
             [preView removeFromSuperview];
             
             if (!resetLocationView)
             {
                 resetLocationView = [[[NSBundle mainBundle] loadNibNamed:@"SetLocationView" owner:nil options:nil] objectAtIndex:0];
             }
-            //TODO:初始化数据
             
             [resetLocationView setFrame:CGRectMake(28, 195, 265, 190)];
             [resetLocationView setDelegate:self];
             [self.backScrollView addSubview:resetLocationView];
             [resetLocationView.originLabel setText:self.originLabelString];
-            
+            [resetLocationView.toChangeLabel setText:[[[DataCenter sharedInstance] changedLocationDic] objectForKey:self.selectedPhone]];
             
             preView = resetLocationView;
             break;

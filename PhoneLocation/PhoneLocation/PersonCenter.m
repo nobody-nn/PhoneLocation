@@ -51,7 +51,14 @@
     {
         thisContact = contact;
     }
-    [self.headImageView setImage:thisContact.headImage];
+    if ([thisContact headImage])
+    {
+        [[self headImageView] setImage:[thisContact headImage]];
+    }
+    else
+    {
+        [[self headImageView] setImage:[[DataCenter sharedInstance] headImage]];
+    }
     [self.nameLabel setText:thisContact.friendName];
     [self.phoneTableView reloadData];
 }
@@ -66,7 +73,7 @@
 -(void)showChoices:(int)action
 {
     actionsType = action;
-    PhonesActionSheet *phoneSheet = [[PhonesActionSheet alloc] initWithArray:self.thisContact.phoneNumbersArray title:@"选择号码" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:nil];
+    PhonesActionSheet *phoneSheet = [[PhonesActionSheet alloc] initWithArray:self.thisContact.phoneNumbersArray title:@"选择号码" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil];
     [phoneSheet showInView:self.view];
 }
 
@@ -201,7 +208,11 @@
 //- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:buttonIndex];
+    if (buttonIndex == 0)
+    {
+        return;
+    }
+    self.choosePhoneNum = [self.thisContact.phoneNumbersArray objectAtIndex:buttonIndex - 1];
     switch (actionsType)
     {
         case kSMSKey:
@@ -227,6 +238,11 @@
     }
 }
 
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet
+{
+    NSLog(@"cancel");
+}
+
 #pragma mark - table actions handler
 
 -(void)setClick:(id)sender
@@ -247,7 +263,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    self.thisContact.locationDic = [NSMutableDictionary dictionary];
     if([self.thisContact phoneNumbersArray])
         return [[self.thisContact phoneNumbersArray] count];
     return 0;
@@ -255,27 +270,31 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID = @"cell";
+    static NSString *cellID;
+    if (!cellID)
+    {
+        cellID = @"cell";
+        UINib *cellNib = [UINib nibWithNibName:@"PersonCell" bundle:nil];
+        [tableView registerNib:cellNib forCellReuseIdentifier:cellID];
+    }
+    
     PersonCell *cell;
     cell = (PersonCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    if(!cell)
-    {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"PersonCell" owner:nil options:nil] objectAtIndex:0];
-    }
     
     NSString *phoneString = [[self.thisContact phoneNumbersArray] objectAtIndex:[indexPath row]];
     [[cell phoneLabel] setText:phoneString];
     [[cell setButton] setTag:[indexPath row]];
     [[cell setButton] addTarget:self action:@selector(setClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSString *locationString = [[self.thisContact locationDic] objectForKey:phoneString];
+    NSString *locationString = [[[DataCenter sharedInstance] requestedDic] objectForKey:phoneString];
     if (locationString)
     {
         [[cell locationLabel] setText:locationString];
     }
     else
     {
-        NSString *URLString = [NSString stringWithFormat:@"%@%@",[[DataCenter sharedInstance]locationURLStringPre],[BackgroundService getPhoneStringWith:phoneString]];
+        [[cell locationLabel] setText:@""];
+        NSString *URLString = [NSString stringWithFormat:@"%@%@",[[DataCenter sharedInstance]locationURLStringPre],[BackgroundService getNumeralWith:phoneString]];
         NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
         
         [NSURLConnection sendAsynchronousRequest:req queue:[[NSOperationQueue alloc] init] completionHandler:
@@ -301,8 +320,6 @@
 }
 
 #pragma mark - xml parser delegate
-
-#define kLocationLabel @"location"
 
 -(id)findDicWith:(NSXMLParser *)parser
 {
@@ -362,8 +379,11 @@
         {
             string = @"未知";
         }
-        [[cellToUpdate locationLabel] setText:string];
-        [[self.thisContact locationDic] setObject:string forKey:[[cellToUpdate phoneLabel] text]];
+        [[cellToUpdate locationLabel] performSelectorOnMainThread:@selector(setText:) withObject:string waitUntilDone:NO];
+        //手机号为键值
+        [[[DataCenter sharedInstance] requestedDic] setObject:string forKey:[[self.thisContact phoneNumbersArray] objectAtIndex:[perDicKey row]]];
+        //save
+        [[DataCenter sharedInstance] saveRequestedDic];
     }
 }
 

@@ -14,6 +14,7 @@
     NSDictionary *words;
 }
 -(void)readLocalAddress;
-+(NSString *)getPhoneStringWith:(NSString *)originString;
++(NSString *)getNumeralWith:(NSString *)originString;
++(NSString *)getCorrectIDWith:(NSString *)originString;
 
 @end

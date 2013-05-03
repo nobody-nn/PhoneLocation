@@ -7,9 +7,11 @@
 //
 
 #import "DataCenter.h"
+#define kChangedDicPath @"changed.plist"
+#define kRequestedDicPath @"requested.plist"
 
 @implementation DataCenter
-@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,root,tableDic,waiting,SendSmsTip,locationURLStringPre,whosWaiting,changedLocationDic,changedLocationPath;
+@synthesize allContactsDic,documentPath,totalContactCount,addressFinishLoad,commonDic,root,tableDic,waiting,SendSmsTip,locationURLStringPre,whosWaiting,changedLocationDic,changedLocationPath,requestedDic,requestedPath,headImage,idURLStringPre;
 
 static DataCenter *instance;
 +(DataCenter *)sharedInstance
@@ -36,12 +38,25 @@ static DataCenter *instance;
             [self saveCommonDic];
         }
         self.locationURLStringPre = @"http://www.youdao.com/smartresult-xml/search.s?type=mobile&q=";
-        self.changedLocationPath = [NSString stringWithFormat:@"%@/changed.plist",documentPath];
+        self.changedLocationPath = [NSString stringWithFormat:@"%@/%@",documentPath,kChangedDicPath];
         self.changedLocationDic = [NSMutableDictionary dictionaryWithContentsOfFile:self.changedLocationPath];
         if (!self.changedLocationDic)
         {
             self.changedLocationDic = [NSMutableDictionary dictionary];
         }
+        self.labelsDic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"LabelComparison" ofType:@"plist"]];
+        if (!self.labelsDic)
+        {
+            NSLog(@"sth is wrong");
+        }
+        requestedPath = [NSString stringWithFormat:@"%@/%@",documentPath,kRequestedDicPath];
+        self.requestedDic = [NSMutableDictionary dictionaryWithContentsOfFile:self.requestedPath];
+        if (!self.requestedDic)
+        {
+            self.requestedDic = [NSMutableDictionary dictionary];
+        }
+        self.headImage = [UIImage imageNamed:@"head.png"];
+        self.idURLStringPre = @"http://www.youdao.com/smartresult-xml/search.s?type=id&q=";
     }
     return self;
 }
@@ -56,6 +71,13 @@ static DataCenter *instance;
 -(void)saveChangedDic
 {
     if(![self.changedLocationDic writeToFile:self.changedLocationPath atomically:YES])
+    {
+        //should not be able to get here
+    }
+}
+-(void)saveRequestedDic
+{
+    if(![self.requestedDic writeToFile:self.requestedPath atomically:YES])
     {
         //should not be able to get here
     }

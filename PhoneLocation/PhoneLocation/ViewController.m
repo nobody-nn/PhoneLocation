@@ -23,6 +23,11 @@
 
 #pragma mark - actions
 
+-(IBAction)moreClick:(id)sender
+{
+    
+}
+
 -(IBAction)searchClick:(id)sender
 {
     if (!searchViewController)
@@ -84,13 +89,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID = @"cell";
+    static NSString *cellID;
+    if (!cellID)
+    {
+        cellID = @"cell";
+        UINib *cellNib = [UINib nibWithNibName:@"FriendTableCell" bundle:nil];
+        [tableView registerNib:cellNib forCellReuseIdentifier:cellID];
+    }
     FriendTableCell *cell;
     cell = (FriendTableCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    if(!cell)
-    {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FriendTableCell" owner:nil options:nil] objectAtIndex:0];
-    }
 
     ContactClass *contactForCell = [[contactsDic objectForKey:[keys objectAtIndex:[indexPath section]]] objectAtIndex:[indexPath row]];
     [[cell nameLabel] setText:[contactForCell friendName]];
@@ -101,7 +108,7 @@
     }
     else
     {
-        [[cell headImageView] setImage:headImage];
+        [[cell headImageView] setImage:[[DataCenter sharedInstance] headImage]];
     }
     
     [[cell nameLabel] setBackgroundColor:[UIColor clearColor]];
@@ -160,7 +167,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    headImage = [UIImage imageNamed:@"head.png"];
     if ([[DataCenter sharedInstance] addressFinishLoad])
     {
         [self updateViewWithNewLoadData];

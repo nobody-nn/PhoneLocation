@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>4</key>
+	<dict>
+		<key>title</key>
+		<string>地址</string>
+		<key>sectionArray</key>
+		<array>
+			<string>[示例]我家在：京都高知街99号天上人间808室</string>
+			<string>[示例]线路：地铁5号线暴风城站D出口300米转公交6路瑟银哨塔向南步行600米就看见黑石塔</string>
+		</array>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>title</key>
+		<string>邮箱</string>
+		<key>sectionArray</key>
+		<array>
+			<string>[示例]我的邮箱是：game999app@qq.com</string>
+			<string>[示例]我的微博是：http://http://weibo.com/doublethree</string>
+		</array>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>title</key>
+		<string>银行帐号</string>
+		<key>sectionArray</key>
+		<array>
+			<string>[示例]我的帐号是：工行 6288888888888888</string>
+			<string>[示例]公司：西域四人组自助游有限公司，开户行：雷音寺皇家银行，帐号：147258369</string>
+		</array>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>title</key>
+		<string>游戏帐号</string>
+		<key>sectionArray</key>
+		<array>
+			<string>[示例]我的Diablo3帐号：StudyHardDayDayUp</string>
+			<string>[示例]我的扣扣号码：3344，密码：你好帅</string>
+		</array>
+	</dict>
+	<key>5</key>
+	<dict>
+		<key>title</key>
+		<string>其他</string>
+		<key>sectionArray</key>
+		<array>
+			<string>[示例]公司的地税代码是：地发字123456789</string>
+			<string>[示例]车牌号：高帅富-12345，粉色的“保10洁”</string>
+		</array>
+	</dict>
+	<key>0</key>
+	<dict>
+		<key>title</key>
+		<string>常用短语</string>
+		<key>sectionArray</key>
+		<array>
+			<string>我在开会，稍后回复。</string>
+			<string>稍后给你回电话。</string>
+			<string>堵车，晚些到，抱歉。</string>
+			<string>我在来的路上，马上到。</string>
+			<string>我在开车，稍后回复。</string>
+			<string>我在外面，回家给你电话。</string>
+			<string>请稍晚打我手机，谢谢。</string>
+			<string>请告诉我你的位置。</string>
+			<string>请与我联系，谢谢。</string>
+			<string>请打我办公室电话，谢谢。</string>
+			<string>请打我家里电话，谢谢。</string>
+		</array>
+	</dict>
+</dict>
+</plist>
