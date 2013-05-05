@@ -14,6 +14,15 @@
 
 @implementation MoreViewController
 
+#pragma mark - actions
+
+-(IBAction)backClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - life cycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

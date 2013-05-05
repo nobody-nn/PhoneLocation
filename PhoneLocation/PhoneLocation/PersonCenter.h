@@ -8,15 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <StoreKit/StoreKit.h>
 
 @class ContactClass,CommonUse,SetLocationViewController;
-@interface PersonCenter : UIViewController<NSXMLParserDelegate,UIActionSheetDelegate,MFMessageComposeViewControllerDelegate>
+@interface PersonCenter : UIViewController<NSXMLParserDelegate,UIActionSheetDelegate,MFMessageComposeViewControllerDelegate,SKStoreProductViewControllerDelegate>
 {
     int actionsType;
     UIView *SendSmsTip;
     CommonUse *commonUse;
     ContactClass *thisContact;
     SetLocationViewController *setLocation;
+    UIView *showTips;
+    UIView *netWorkTips;
+    BOOL noNetWorkSinceLastCheck;
 }
 @property(nonatomic,retain) ContactClass *thisContact;
 

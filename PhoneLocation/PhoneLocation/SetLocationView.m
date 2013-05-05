@@ -16,6 +16,10 @@
 - (IBAction)okClick:(id)sender
 {
     NSString *location = [toChangeLabel text];
+    if ([location length] == 0)
+    {
+        return;
+    }
     if ([self.delegate respondsToSelector:@selector(choosedLocation:)])
     {
         [self.delegate performSelector:@selector(choosedLocation:) withObject:location];

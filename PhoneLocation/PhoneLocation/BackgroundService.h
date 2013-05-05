@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
 
+
+typedef enum {
+    NotReachable = 0,
+    ReachableViaWiFi,
+    ReachableViaWWAN
+} NetworkStatus;
+
 @interface BackgroundService : NSObject
 {
     NSDictionary *words;
@@ -16,5 +23,7 @@
 -(void)readLocalAddress;
 +(NSString *)getNumeralWith:(NSString *)originString;
 +(NSString *)getCorrectIDWith:(NSString *)originString;
+
++ (BOOL) connectedToNetwork;
 
 @end

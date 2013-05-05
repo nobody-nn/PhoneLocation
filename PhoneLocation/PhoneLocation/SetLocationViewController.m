@@ -83,13 +83,14 @@
     {
         originLabel = [originLabel stringByReplacingOccurrencesOfString:@"_$!<" withString:@""];
         originLabel = [originLabel stringByReplacingOccurrencesOfString:@">!$_" withString:@""];
+        self.originLabelString = originLabel;
     }
     
     CFRelease(originRef);
     CFRelease(phones);
     CFRelease(addressRef);
     
-    [setLocation setImage:[UIImage imageNamed:[selectedImageName objectAtIndex:0]] forState:UIControlStateNormal];
+    [setLocation setBackgroundImage:[UIImage imageNamed:[selectedImageName objectAtIndex:1]] forState:UIControlStateNormal];
     preButton = setLocation;
     [self topButtonClick:setLocation];
     
@@ -142,20 +143,20 @@
         NSLog(@"修改成功");
         [self.thisContact.locationDic setObject:location forKey:self.selectedPhone];
         [self.parent reloadPhoneTable];
-        [[[DataCenter sharedInstance] changedLocationDic] setObject:self.originLabelString forKey:self.selectedPhone];
-        [[DataCenter sharedInstance] saveChangedDic];
         ABAddressBookSave(addressRef, nil);
         
         //Doc 保存
         NSMutableDictionary *tempChangedDic = [[DataCenter sharedInstance] changedLocationDic];
-        
-        [tempChangedDic setObject:self.originLabelString forKey:self.selectedPhone];
-        [[DataCenter sharedInstance] saveChangedDic];
+        if (![tempChangedDic objectForKey:self.selectedPhone])
+        {
+            [tempChangedDic setObject:self.originLabelString forKey:self.selectedPhone];
+            [[DataCenter sharedInstance] saveChangedDic];
+        }
     }
     else
     {
         CFStringRef reason = CFErrorCopyFailureReason(error);
-        NSLog((__bridge NSString *)(reason));
+        NSLog(@"%@",(__bridge NSString *)(reason));
         CFRelease(reason);
     }
     CFRelease(toChangeValue);
@@ -180,8 +181,8 @@
         buttonBGImageView.center = CGPointMake(20 + buttonTag * 109, buttonBGImageView.center.y);
     }];
     
-    [preButton setImage:nil forState:UIControlStateNormal];
-    [sender setImage:[UIImage imageNamed:[selectedImageName objectAtIndex:buttonTag]] forState:UIControlStateNormal];
+    [preButton setBackgroundImage:[UIImage imageNamed:[selectedImageName objectAtIndex:0]] forState:UIControlStateNormal];
+    [sender setBackgroundImage:[UIImage imageNamed:[selectedImageName objectAtIndex:1]] forState:UIControlStateNormal];
     preButton = sender;
     //TODO:load view
     switch (buttonTag)
@@ -195,7 +196,7 @@
                 setLocationView = [[[NSBundle mainBundle] loadNibNamed:@"SetLocationView" owner:nil options:nil] objectAtIndex:0];
             }
             
-            [setLocationView setFrame:CGRectMake(28, 195, 265, 190)];
+            [setLocationView setFrame:CGRectMake(28, 175, 265, 210)];
             [setLocationView setDelegate:self];
             [self.backScrollView addSubview:setLocationView];
             [setLocationView.originLabel setText:self.originLabelString];
@@ -212,7 +213,7 @@
                 customLocationView = [[[NSBundle mainBundle] loadNibNamed:@"CustomLocationView" owner:nil options:nil] objectAtIndex:0];
             }
             
-            [customLocationView setFrame:CGRectMake(28, 195, 265, 190)];
+            [customLocationView setFrame:CGRectMake(28, 175, 265, 210)];
             [customLocationView setDelegate:self];
             [customLocationView setParent:self];
             [self.backScrollView addSubview:customLocationView];
@@ -224,6 +225,8 @@
         {
             if (![[[DataCenter sharedInstance] changedLocationDic] objectForKey:self.selectedPhone])
             {
+                [preButton setBackgroundImage:[UIImage imageNamed:[selectedImageName objectAtIndex:1]] forState:UIControlStateNormal];
+                [sender setBackgroundImage:[UIImage imageNamed:[selectedImageName objectAtIndex:0]] forState:UIControlStateNormal];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"没有更改过" message:@"只有本软件修改过的号码才可以恢复" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
                 [alert show];
                 break;
@@ -235,7 +238,7 @@
                 resetLocationView = [[[NSBundle mainBundle] loadNibNamed:@"SetLocationView" owner:nil options:nil] objectAtIndex:0];
             }
             
-            [resetLocationView setFrame:CGRectMake(28, 195, 265, 190)];
+            [resetLocationView setFrame:CGRectMake(28, 175, 265, 210)];
             [resetLocationView setDelegate:self];
             [self.backScrollView addSubview:resetLocationView];
             [resetLocationView.originLabel setText:self.originLabelString];
@@ -269,7 +272,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    selectedImageName = [[NSArray alloc] initWithObjects:@"dianji1.png",@"dianji3.png",@"dianji2.png", nil];
+    selectedImageName = [[NSArray alloc] initWithObjects:@"info_share.png",@"info_share_hl.png", nil];
 }
 
 -(void)dealloc

@@ -12,6 +12,7 @@
 #import "FriendTableCell.h"
 #import "PersonCenter.h"
 #import "SearchViewController.h"
+#import "MoreViewController.h"
 
 @interface ViewController ()
 
@@ -25,7 +26,11 @@
 
 -(IBAction)moreClick:(id)sender
 {
-    
+    if (!moreViewController)
+    {
+        moreViewController = [[MoreViewController alloc]initWithNibName:@"MoreViewController" bundle:nil];
+    }
+    [self.navigationController pushViewController:moreViewController animated:YES];
 }
 
 -(IBAction)searchClick:(id)sender

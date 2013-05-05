@@ -22,5 +22,7 @@
 	<string>传呼</string>
 	<key>_$!&lt;Other&gt;!$_</key>
 	<string>其他</string>
+	<key>_$!&lt;HomePage&gt;!$_</key>
+	<string>主页</string>
 </dict>
 </plist>

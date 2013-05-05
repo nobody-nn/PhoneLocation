@@ -172,8 +172,45 @@
     [self.view setUserInteractionEnabled:YES];
 }
 
+-(void)removeTip:(UIView *)tip
+{
+    [UIView animateWithDuration:0.3
+                     animations:^{tip.alpha = 0.0;}
+                     completion:^(BOOL finished)
+     {
+         [tip removeFromSuperview];
+     }];
+}
+
+-(BOOL)hasNetWorkOrNot
+{
+    BOOL hasNetwork = [BackgroundService connectedToNetwork];
+    if (!hasNetwork)
+    {
+        if(!netWorkTips)
+        {
+            netWorkTips = [[[NSBundle mainBundle] loadNibNamed:@"ShowTips" owner:nil options:nil]objectAtIndex:0];
+            [netWorkTips setFrame:CGRectMake(85, 200, 151, 40)];
+            UILabel *tipContentLabel = (UILabel *)[netWorkTips viewWithTag:33];
+            [tipContentLabel setText:@"未检测到网络连接"];
+        }
+        else
+        {
+            [netWorkTips setAlpha:1];
+            [netWorkTips setHidden:NO];
+        }
+        [self.view addSubview:netWorkTips];
+        [self performSelector:@selector(removeTip:) withObject:netWorkTips afterDelay:1.0f];
+    }
+    return hasNetwork;
+}
+
 -(IBAction)searchIDClick:(id)sender
 {
+    if (![self hasNetWorkOrNot])
+    {
+        return;
+    }
     [self.searchIDField resignFirstResponder];
     [self.searchLocationField resignFirstResponder];
     type = SearchID;
@@ -241,6 +278,10 @@
 
 -(IBAction)searchPhoneClick:(id)sender
 {
+    if (![self hasNetWorkOrNot])
+    {
+        return;
+    }
     [self.searchIDField resignFirstResponder];
     [self.searchLocationField resignFirstResponder];
     type = SearchPhone;

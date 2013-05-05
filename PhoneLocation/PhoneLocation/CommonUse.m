@@ -55,7 +55,6 @@
     }
     
     [self dismissModalViewControllerAnimated:NO];
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

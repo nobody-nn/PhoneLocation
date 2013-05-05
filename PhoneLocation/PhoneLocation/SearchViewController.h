@@ -17,5 +17,6 @@ enum SearchType {
 {
     enum SearchType type;
     BOOL storing;
+    UIView *netWorkTips;
 }
 @end
